@@ -141,7 +141,13 @@
                             <outlet property="delegate" destination="DjB-ho-eho" id="SgA-Cx-uaT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Troops" id="FRO-Hx-ccF"/>
+                    <navigationItem key="navigationItem" title="Troops" id="FRO-Hx-ccF">
+                        <barButtonItem key="leftBarButtonItem" image="Settings" id="pdE-B0-Xq4">
+                            <connections>
+                                <action selector="moreActions:" destination="DjB-ho-eho" id="dm8-bF-gi0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -194,7 +200,7 @@
                         <sections>
                             <tableViewSection id="ASH-aI-Oci">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" id="pDg-1C-lI0">
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" id="pDg-1C-lI0">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDg-1C-lI0" id="dsb-YT-jjf">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -214,13 +220,13 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" id="mYP-bv-SSG">
+                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" id="mYP-bv-SSG">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mYP-bv-SSG" id="cwm-9w-RqV">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" id="dHx-bi-2yT">
+                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" id="dHx-bi-2yT">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dHx-bi-2yT" id="Igk-8q-jTG">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -262,6 +268,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Settings" width="48" height="48"/>
         <image name="pinocciologo.png" width="500" height="128"/>
     </resources>
 </document>

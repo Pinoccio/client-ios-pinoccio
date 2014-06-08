@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ScoutListTableViewController.h"
+#import "LoginViewController.h"
 #import "JNKeychain.h"
-@interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+#import "MBProgressHUD.h"
+@interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @end

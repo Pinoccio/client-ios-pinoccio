@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B9060B7019440FF7000AC166 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060B6F19440FF7000AC166 /* main.m */; };
 		B9060B7319440FF7000AC166 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060B7219440FF7000AC166 /* AppDelegate.m */; };
-		B9060B7619440FF7000AC166 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060B7519440FF7000AC166 /* ViewController.m */; };
 		B9060B7919440FF7000AC166 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9060B7719440FF7000AC166 /* Main.storyboard */; };
 		B9060B7B19440FF7000AC166 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9060B7A19440FF7000AC166 /* Images.xcassets */; };
 		B9060B8719440FF7000AC166 /* PinoccioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060B8619440FF7000AC166 /* PinoccioTests.m */; };
@@ -39,8 +38,6 @@
 		B9060B6F19440FF7000AC166 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9060B7119440FF7000AC166 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9060B7219440FF7000AC166 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B9060B7419440FF7000AC166 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B9060B7519440FF7000AC166 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B9060B7819440FF7000AC166 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9060B7A19440FF7000AC166 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B9060B8019440FF7000AC166 /* PinoccioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PinoccioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,9 +102,9 @@
 				B9060BD719442148000AC166 /* pinocciologo@2x.png */,
 				B9060B7119440FF7000AC166 /* AppDelegate.h */,
 				B9060B7219440FF7000AC166 /* AppDelegate.m */,
+				B9060B7719440FF7000AC166 /* Main.storyboard */,
 				B9DCD7FF19443DD300711E54 /* Libraries */,
 				B9060BE1194423F8000AC166 /* View Controllers */,
-				B9060B7719440FF7000AC166 /* Main.storyboard */,
 				B9060B7A19440FF7000AC166 /* Images.xcassets */,
 				B9060B6D19440FF7000AC166 /* Supporting Files */,
 			);
@@ -152,8 +149,6 @@
 		B9060BE1194423F8000AC166 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B9060B7419440FF7000AC166 /* ViewController.h */,
-				B9060B7519440FF7000AC166 /* ViewController.m */,
 				B9060BD319442021000AC166 /* MainTableViewController.h */,
 				B9060BD419442021000AC166 /* MainTableViewController.m */,
 				B9060BDA1944235F000AC166 /* LoginViewController.h */,
@@ -287,7 +282,6 @@
 			files = (
 				B9060BD519442021000AC166 /* MainTableViewController.m in Sources */,
 				B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */,
-				B9060B7619440FF7000AC166 /* ViewController.m in Sources */,
 				B9060B7319440FF7000AC166 /* AppDelegate.m in Sources */,
 				B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */,
 				B9060BDF194423EB000AC166 /* JNKeychain.m in Sources */,

@@ -11,5 +11,7 @@
 @interface ScoutControlTableViewController : UITableViewController
 @property (strong,nonatomic) NSString *scoutID;
 @property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) NSString *scoutName;
+
 
 @end

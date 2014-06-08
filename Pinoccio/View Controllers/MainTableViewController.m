@@ -27,9 +27,13 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] != nil) {
+    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] == nil) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }else {
+        [self checkLogin];
     }
+}
+-(void)checkLogin {
     NSString *tempTokenStorage = [self token];
     if (![tempTokenStorage  isEqual:@"None!"]) {
         globalToken = tempTokenStorage;
@@ -37,8 +41,16 @@
         [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }
-    globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
-    [self.tableView reloadData];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Getting troops...";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
+        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
+
 }
 - (void)viewDidLoad
 {
@@ -49,6 +61,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+- (IBAction)moreActions:(id)sender {
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Title" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Logout" otherButtonTitles:@"Goto HQ", nil];
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [popupQuery showInView:self.view];
 }
 -(NSDictionary *)allTroopsFor:(NSString *)token {
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/troops?token=%@",token]];
@@ -121,6 +138,41 @@
 {
     return @"Copyright © Haifisch 2014";
 }
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // Logout
+        [JNKeychain deleteValueForKey:@"PinoccioKeychainUsername"];
+        [JNKeychain deleteValueForKey:@"PinoccioKeychainPassword"];
+        
+        [self checkLogin];
+
+    } else if (buttonIndex == 1) {
+        NSLog(@"OPen 1");
+    } else if (buttonIndex == 2) {
+        NSLog(@"OPen 2");
+    }
+    
+    /**
+     * OR use the following switch statement
+     * Suggested by Colin =)
+     */
+    /*
+     switch (buttonIndex) {
+     case 0:
+     self.label.text = @"Destructive Button Clicked";
+     break;
+     case 1:
+     self.label.text = @"Other Button 1 Clicked";
+     break;
+     case 2:
+     self.label.text = @"Other Button 2 Clicked";
+     break;
+     case 3:
+     self.label.text = @"Cancel Button Clicked";
+     break;
+     }
+     */
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -166,16 +218,14 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"%@",sender);
-    ScoutListTableViewController *scoutList = [segue destinationViewController];
-    UITableViewCell *selectedCell = (UITableViewCell *)sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
-    scoutList.troopID = [[[globalTroopDict objectForKey:@"data"] objectAtIndex:indexPath.row] objectForKey:@"token"];
-    scoutList.token = globalToken;
-    NSLog(@"%@",globalToken);
-
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSLog(@"Dest: %@", [segue identifier]);
+    if ([segue.identifier  isEqual: @"scoutListSegue"]) {
+        ScoutListTableViewController *scoutList = [segue destinationViewController];
+        UITableViewCell *selectedCell = (UITableViewCell *)sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
+        scoutList.troopID = [[[globalTroopDict objectForKey:@"data"] objectAtIndex:indexPath.row] objectForKey:@"token"];
+        scoutList.token = globalToken;
+    }
 }
 
 

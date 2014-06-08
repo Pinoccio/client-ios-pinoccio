@@ -29,13 +29,22 @@
 {
     [super viewDidLoad];
     self.title = @"Scouts";
-    NSLog(@"%@",self.troopID);
     globalScoutList = [[NSMutableDictionary alloc] init];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Getting scouts...";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self reloadScouts];
+        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
+}
+-(void)reloadScouts {
     NSString *urlString = [NSString stringWithFormat:@"https://api.pinocc.io/v1/1/scouts?token=%@",self.token];
     globalScoutList = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]] options:0 error:nil];
-    NSLog(@"%@",globalScoutList);
-}
 
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -115,6 +124,7 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
     destController.token = self.token;
     destController.scoutID = globalScoutList[@"data"][indexPath.row][@"id"];
+    destController.scoutName = globalScoutList[@"data"][indexPath.row][@"name"];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
