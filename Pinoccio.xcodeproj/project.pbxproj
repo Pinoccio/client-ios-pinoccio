@@ -17,6 +17,7 @@
 		B9060BD919442148000AC166 /* pinocciologo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9060BD719442148000AC166 /* pinocciologo@2x.png */; };
 		B9060BDC1944235F000AC166 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BDB1944235F000AC166 /* LoginViewController.m */; };
 		B9060BDF194423EB000AC166 /* JNKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BDE194423EB000AC166 /* JNKeychain.m */; };
+		B9ACB69C1944FD2E001CEAB6 /* LEDColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9ACB69B1944FD2E001CEAB6 /* LEDColorViewController.m */; };
 		B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */; };
 		B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */; };
 		B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7FC19443DC800711E54 /* MBProgressHUD.m */; };
@@ -51,6 +52,8 @@
 		B9060BDB1944235F000AC166 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B9060BDD194423EB000AC166 /* JNKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNKeychain.h; sourceTree = "<group>"; };
 		B9060BDE194423EB000AC166 /* JNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychain.m; sourceTree = "<group>"; };
+		B9ACB69A1944FD2E001CEAB6 /* LEDColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEDColorViewController.h; sourceTree = "<group>"; };
+		B9ACB69B1944FD2E001CEAB6 /* LEDColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEDColorViewController.m; sourceTree = "<group>"; };
 		B9DCD7F519442E7400711E54 /* ScoutListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoutListTableViewController.h; sourceTree = "<group>"; };
 		B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoutListTableViewController.m; sourceTree = "<group>"; };
 		B9DCD7F819443AD100711E54 /* ScoutControlTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoutControlTableViewController.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */,
 				B9DCD7F819443AD100711E54 /* ScoutControlTableViewController.h */,
 				B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */,
+				B9ACB69A1944FD2E001CEAB6 /* LEDColorViewController.h */,
+				B9ACB69B1944FD2E001CEAB6 /* LEDColorViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */,
 				B9060B7319440FF7000AC166 /* AppDelegate.m in Sources */,
 				B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */,
+				B9ACB69C1944FD2E001CEAB6 /* LEDColorViewController.m in Sources */,
 				B9060BDF194423EB000AC166 /* JNKeychain.m in Sources */,
 				B9060B7019440FF7000AC166 /* main.m in Sources */,
 				B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */,

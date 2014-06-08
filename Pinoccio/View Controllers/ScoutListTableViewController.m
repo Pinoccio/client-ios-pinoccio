@@ -43,7 +43,6 @@
 -(void)reloadScouts {
     NSString *urlString = [NSString stringWithFormat:@"https://api.pinocc.io/v1/1/scouts?token=%@",self.token];
     globalScoutList = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]] options:0 error:nil];
-
 }
 - (void)didReceiveMemoryWarning
 {
@@ -73,7 +72,13 @@
     
     return cell;
 }
-
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @"Your Scouts";
+}
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    return @"Copyright © Pinoccio 2014";
+}
 
 /*
 // Override to support conditional editing of the table view.

@@ -36,6 +36,7 @@
 -(void)checkLogin {
     NSString *tempTokenStorage = [self token];
     if (![tempTokenStorage  isEqual:@"None!"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
         globalToken = tempTokenStorage;
     }else {
         [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
@@ -68,6 +69,7 @@
     [popupQuery showInView:self.view];
 }
 -(NSDictionary *)allTroopsFor:(NSString *)token {
+    NSLog(@"Token: %@",token);
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/troops?token=%@",token]];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
     NSLog(@"%@",dict);
@@ -136,7 +138,7 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Copyright © Haifisch 2014";
+    return @"Copyright © Pinoccio 2014";
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
@@ -151,27 +153,6 @@
     } else if (buttonIndex == 2) {
         NSLog(@"OPen 2");
     }
-    
-    /**
-     * OR use the following switch statement
-     * Suggested by Colin =)
-     */
-    /*
-     switch (buttonIndex) {
-     case 0:
-     self.label.text = @"Destructive Button Clicked";
-     break;
-     case 1:
-     self.label.text = @"Other Button 1 Clicked";
-     break;
-     case 2:
-     self.label.text = @"Other Button 2 Clicked";
-     break;
-     case 3:
-     self.label.text = @"Cancel Button Clicked";
-     break;
-     }
-     */
 }
 
 /*
