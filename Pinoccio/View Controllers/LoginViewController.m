@@ -26,6 +26,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [(UITextField*)[self.view viewWithTag:1] setDelegate:self];
+    [(UITextField*)[self.view viewWithTag:2] setDelegate:self];
+
     // Do any additional setup after loading the view.
 }
 
@@ -39,7 +42,15 @@
     [JNKeychain saveValue:[(UITextField*)[self.view viewWithTag:2] text] forKey:@"PinoccioKeychainPassword"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField tag] == 1) {
+        [(UITextField*)[self.view viewWithTag:2] becomeFirstResponder];
+    }else if ([textField tag] == 2){
+        [(UITextField*)[self.view viewWithTag:2] resignFirstResponder];
+        [self login:nil];
+    }
+    return YES;
+}
 /*
 #pragma mark - Navigation
 

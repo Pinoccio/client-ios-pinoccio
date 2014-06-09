@@ -31,14 +31,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B9060B6A19440FF7000AC166 /* Pinoccio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pinoccio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9060B6A19440FF7000AC166 /* Pinoccio HQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pinoccio HQ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9060B6E19440FF7000AC166 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9060B6F19440FF7000AC166 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B9060B7119440FF7000AC166 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B9060B7219440FF7000AC166 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B9060B7819440FF7000AC166 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B9060B7A19440FF7000AC166 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B9060B8019440FF7000AC166 /* PinoccioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PinoccioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9060B8019440FF7000AC166 /* Pinoccio HQTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pinoccio HQTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9060B8519440FF7000AC166 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9060B8619440FF7000AC166 /* PinoccioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PinoccioTests.m; sourceTree = "<group>"; };
 		B9060BD319442021000AC166 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
@@ -85,8 +85,8 @@
 		B9060B6B19440FF7000AC166 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9060B6A19440FF7000AC166 /* Pinoccio.app */,
-				B9060B8019440FF7000AC166 /* PinoccioTests.xctest */,
+				B9060B6A19440FF7000AC166 /* Pinoccio HQ.app */,
+				B9060B8019440FF7000AC166 /* Pinoccio HQTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -176,9 +176,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B9060B6919440FF7000AC166 /* Pinoccio */ = {
+		B9060B6919440FF7000AC166 /* Pinoccio HQ */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B9060B8A19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio" */;
+			buildConfigurationList = B9060B8A19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio HQ" */;
 			buildPhases = (
 				B9060B6619440FF7000AC166 /* Sources */,
 				B9060B6719440FF7000AC166 /* Frameworks */,
@@ -188,14 +188,14 @@
 			);
 			dependencies = (
 			);
-			name = Pinoccio;
+			name = "Pinoccio HQ";
 			productName = Pinoccio;
-			productReference = B9060B6A19440FF7000AC166 /* Pinoccio.app */;
+			productReference = B9060B6A19440FF7000AC166 /* Pinoccio HQ.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B9060B7F19440FF7000AC166 /* PinoccioTests */ = {
+		B9060B7F19440FF7000AC166 /* Pinoccio HQTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B9060B8D19440FF7000AC166 /* Build configuration list for PBXNativeTarget "PinoccioTests" */;
+			buildConfigurationList = B9060B8D19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio HQTests" */;
 			buildPhases = (
 				B9060B7C19440FF7000AC166 /* Sources */,
 				B9060B7D19440FF7000AC166 /* Frameworks */,
@@ -206,9 +206,9 @@
 			dependencies = (
 				B9060B8219440FF7000AC166 /* PBXTargetDependency */,
 			);
-			name = PinoccioTests;
+			name = "Pinoccio HQTests";
 			productName = PinoccioTests;
-			productReference = B9060B8019440FF7000AC166 /* PinoccioTests.xctest */;
+			productReference = B9060B8019440FF7000AC166 /* Pinoccio HQTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -229,7 +229,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B9060B6519440FF7000AC166 /* Build configuration list for PBXProject "Pinoccio" */;
+			buildConfigurationList = B9060B6519440FF7000AC166 /* Build configuration list for PBXProject "Pinoccio HQ" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -242,8 +242,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B9060B6919440FF7000AC166 /* Pinoccio */,
-				B9060B7F19440FF7000AC166 /* PinoccioTests */,
+				B9060B6919440FF7000AC166 /* Pinoccio HQ */,
+				B9060B7F19440FF7000AC166 /* Pinoccio HQTests */,
 			);
 		};
 /* End PBXProject section */
@@ -296,7 +296,7 @@
 /* Begin PBXTargetDependency section */
 		B9060B8219440FF7000AC166 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B9060B6919440FF7000AC166 /* Pinoccio */;
+			target = B9060B6919440FF7000AC166 /* Pinoccio HQ */;
 			targetProxy = B9060B8119440FF7000AC166 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -396,7 +396,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pinoccio HQ";
 			};
 			name = Debug;
 		};
@@ -407,7 +407,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pinoccio HQ";
 			};
 			name = Release;
 		};
@@ -426,7 +426,7 @@
 				INFOPLIST_FILE = "PinoccioTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pinoccio HQTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -442,7 +442,7 @@
 				INFOPLIST_FILE = "PinoccioTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pinoccio HQTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -450,7 +450,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B9060B6519440FF7000AC166 /* Build configuration list for PBXProject "Pinoccio" */ = {
+		B9060B6519440FF7000AC166 /* Build configuration list for PBXProject "Pinoccio HQ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B9060B8819440FF7000AC166 /* Debug */,
@@ -459,7 +459,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B9060B8A19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio" */ = {
+		B9060B8A19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio HQ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B9060B8B19440FF7000AC166 /* Debug */,
@@ -468,7 +468,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B9060B8D19440FF7000AC166 /* Build configuration list for PBXNativeTarget "PinoccioTests" */ = {
+		B9060B8D19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio HQTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B9060B8E19440FF7000AC166 /* Debug */,

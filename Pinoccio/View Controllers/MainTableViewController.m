@@ -27,36 +27,42 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-}
--(void)checkLogin {
-    NSString *tempTokenStorage = [self token];
-    if (![tempTokenStorage  isEqual:@"None!"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
-        globalToken = tempTokenStorage;
-    }else {
-        [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
+    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] == nil) {
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }else {
+        [self checkLogin:NO];
     }
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Getting troops...";
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
-        [self.tableView reloadData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-    });
+}
+-(void)checkLogin:(BOOL)loggedOut {
+    if (globalToken == nil) {
+        NSString *tempTokenStorage = [self token];
+        if (![tempTokenStorage  isEqual:@"None!"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
+            globalToken = tempTokenStorage;
+            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            hud.labelText = @"Getting troops...";
+            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
+                [self.tableView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                });
+            });
+        }else if(loggedOut){
+            [[[UIAlertView alloc] initWithTitle:@"Logged out!" message:@"Successfully logged out" delegate:nil cancelButtonTitle:@"Ok :D" otherButtonTitles:nil, nil] show];
+            [self performSegueWithIdentifier:@"loginSegue" sender:self];
 
+        }else {
+            [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
+            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        }
+    }
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     globalTroopDict = [[NSMutableDictionary alloc] init];
-    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] == nil) {
-        [self performSegueWithIdentifier:@"loginSegue" sender:self];
-    }else {
-        [self checkLogin];
-    }
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -132,9 +138,6 @@
     
     return cell;
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"Your Troops";
-}
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     return @"Copyright © Pinoccio 2014";
@@ -144,8 +147,8 @@
         // Logout
         [JNKeychain deleteValueForKey:@"PinoccioKeychainUsername"];
         [JNKeychain deleteValueForKey:@"PinoccioKeychainPassword"];
-        
-        [self checkLogin];
+        globalToken = nil;
+        [self checkLogin:YES];
 
     } else if (buttonIndex == 1) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
@@ -205,7 +208,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"Dest: %@", [segue identifier]);
     if ([segue.identifier  isEqual: @"scoutListSegue"]) {
         ScoutListTableViewController *scoutList = [segue destinationViewController];
         UITableViewCell *selectedCell = (UITableViewCell *)sender;

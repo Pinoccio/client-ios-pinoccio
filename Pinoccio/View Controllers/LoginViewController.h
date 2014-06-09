@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "JNKeychain.h"
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <UITextFieldDelegate>
 
 @end

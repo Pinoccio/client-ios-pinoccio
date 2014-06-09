@@ -73,14 +73,12 @@
                                            [self.navigationController popViewControllerAnimated:YES];
                                        }
                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                       NSLog(@"%@",globalScoutDict);
                                    }else {
                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                                        [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                                        [self.navigationController popViewControllerAnimated:YES];
                                        
                                    }
-                                   
                                }];
 
 }
@@ -114,7 +112,19 @@
                         }];
 }
 - (IBAction)setRGBColor:(id)sender {
-    NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.setRGB(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *urlString;
+    /* Need to properly handle blinking
+    
+     if ([(UISwitch *) [self.view viewWithTag:12] isOn]) {
+        if ([(UISwitch *) [self.view viewWithTag:13] isOn]) {
+            urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.blink(%.0f,%.0f,%.0f,500,1)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        }else {
+            urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.blink(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        }
+    }else {
+    }*/
+    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.setRGB(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Running...";
     NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
@@ -123,6 +133,7 @@
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (!error){
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                   NSLog(@"%@",globalScoutDict);
                                    [self getInitial];
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -135,55 +146,5 @@
     [(UILabel *) [self.view viewWithTag:11] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:7] value]]];
     [(UIView *)[self.view viewWithTag:8]setBackgroundColor:[UIColor colorWithRed:[(UISlider*)[self.view viewWithTag:5] value]/255 green:[(UISlider*)[self.view viewWithTag:6] value]/255 blue:[(UISlider*)[self.view viewWithTag:7] value]/255 alpha:1]];
 }
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 @end
