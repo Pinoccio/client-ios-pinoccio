@@ -151,7 +151,16 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
     }
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 100;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 260, 67)];
+    pinoccioLogo.image = [UIImage imageNamed:@"pinocciologo"];
+    [header addSubview:pinoccioLogo];
+    return header;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
