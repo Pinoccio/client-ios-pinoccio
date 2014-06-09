@@ -12,6 +12,7 @@
 @property (strong,nonatomic) NSString *scoutID;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *scoutName;
+@property (strong, nonatomic) IBOutlet UILabel *scoutNameLabel;
 
 
 @end

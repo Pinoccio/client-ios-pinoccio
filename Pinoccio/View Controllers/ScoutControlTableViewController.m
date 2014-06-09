@@ -30,15 +30,17 @@
 {
     [super viewDidLoad];
     self.title = self.scoutName;
+    self.scoutNameLabel.text = self.scoutName;
     globalScoutDict = [[NSMutableDictionary alloc] init];
-    NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print led.isoff?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    globalScoutDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
-    if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
-        [self.toggleSwitch setOn:NO];
-    }else {
-        [self.toggleSwitch setOn:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Loading...";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self getInitial];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
 
-    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -51,7 +53,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)getInitial{
+    NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print led.isoff?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    if ([NSData dataWithContentsOfURL:urlString] == nil) {
+        [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else {
+        globalScoutDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
+        if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
+            [self.toggleSwitch setOn:NO];
+        }else {
+            [self.toggleSwitch setOn:YES];
+        }
+    }
+}
 - (IBAction)onoffSwitch:(id)sender {
     NSURL *urlString;
     if ([(UISwitch *)sender isOn]) {
@@ -68,6 +83,22 @@
         });
     });
     NSLog(@"%@",globalScoutDict);
+}
+- (IBAction)setRGBColor:(id)sender {
+    NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.setRGB(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"Running...";
+    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        globalScoutDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
+        NSLog(@"%@",globalScoutDict);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
+}
+- (IBAction)rgbChanged:(id)sender {
+    UIView *preview = [self.view viewWithTag:8];
+    preview.backgroundColor = [UIColor colorWithRed:[(UISlider*)[self.view viewWithTag:5] value]/255 green:[(UISlider*)[self.view viewWithTag:6] value]/255 blue:[(UISlider*)[self.view viewWithTag:7] value]/255 alpha:1];
 }
 
 /*

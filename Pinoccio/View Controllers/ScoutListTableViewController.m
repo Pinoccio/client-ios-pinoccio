@@ -43,6 +43,7 @@
 -(void)reloadScouts {
     NSString *urlString = [NSString stringWithFormat:@"https://api.pinocc.io/v1/1/scouts?token=%@",self.token];
     globalScoutList = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]] options:0 error:nil];
+    NSLog(@"%@",globalScoutList);
 }
 - (void)didReceiveMemoryWarning
 {

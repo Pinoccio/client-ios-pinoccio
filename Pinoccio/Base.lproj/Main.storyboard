@@ -35,7 +35,7 @@
                                     <action selector="login:" destination="5Gb-l5-rqj" eventType="touchUpInside" id="FXm-OB-BBs"/>
                                 </connections>
                             </button>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pinocciologo.png" translatesAutoresizingMaskIntoConstraints="NO" id="mXO-73-ySs">
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pinocciologo" translatesAutoresizingMaskIntoConstraints="NO" id="mXO-73-ySs">
                                 <rect key="frame" x="30" y="148" width="260" height="67"/>
                             </imageView>
                         </subviews>
@@ -198,20 +198,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection id="ASH-aI-Oci">
+                            <tableViewSection headerTitle="scout info" id="ASH-aI-Oci">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" id="pDg-1C-lI0">
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" textLabel="fxr-5H-olV" detailTextLabel="qq2-E9-TD5" style="IBUITableViewCellStyleValue1" id="pDg-1C-lI0">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDg-1C-lI0" id="dsb-YT-jjf">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch appearanceType="aqua" opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OPg-bE-bVT">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fxr-5H-olV">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qq2-E9-TD5">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="LED Controller" id="z6c-8t-dpp">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" id="vqc-kS-wuC">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vqc-kS-wuC" id="Z3E-LS-b8n">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch appearanceType="aqua" opaque="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yyq-JQ-vES">
                                                     <rect key="frame" x="251" y="6" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="onoffSwitch:" destination="onW-f8-yu9" eventType="valueChanged" id="My8-Sd-BEg"/>
+                                                        <action selector="onoffSwitch:" destination="onW-f8-yu9" eventType="valueChanged" id="cuD-l8-d5m"/>
                                                     </connections>
                                                 </switch>
-                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LED Switch (ON/OFF)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8D-Ub-skJ">
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LED Switch (ON/OFF)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynt-7P-sLj">
                                                     <rect key="frame" x="20" y="11" width="167" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -220,27 +244,61 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="FBu-vi-ndL" style="IBUITableViewCellStyleDefault" id="mYP-bv-SSG">
+                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="240" id="C0c-p6-ufY">
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mYP-bv-SSG" id="cwm-9w-RqV">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C0c-p6-ufY" id="Ygy-pc-wn1">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Set LED Colour" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FBu-vi-ndL">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <slider appearanceType="aqua" opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="255" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="Zxv-l5-euf">
+                                                    <rect key="frame" x="31" y="131" width="255" height="31"/>
+                                                    <connections>
+                                                        <action selector="rgbChanged:" destination="onW-f8-yu9" eventType="valueChanged" id="FYT-62-1fa"/>
+                                                    </connections>
+                                                </slider>
+                                                <slider appearanceType="aqua" opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="255" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="GU6-he-FtV">
+                                                    <rect key="frame" x="31" y="93" width="255" height="31"/>
+                                                    <connections>
+                                                        <action selector="rgbChanged:" destination="onW-f8-yu9" eventType="valueChanged" id="l2o-9b-ZeZ"/>
+                                                    </connections>
+                                                </slider>
+                                                <slider appearanceType="aqua" opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="255" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="e0H-ek-3od">
+                                                    <rect key="frame" x="31" y="169" width="255" height="31"/>
+                                                    <connections>
+                                                        <action selector="rgbChanged:" destination="onW-f8-yu9" eventType="valueChanged" id="Azn-6A-fAi"/>
+                                                    </connections>
+                                                </slider>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKJ-ql-0k5">
+                                                    <rect key="frame" x="8" y="97" width="17" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="G:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-Es-LDF">
+                                                    <rect key="frame" x="8" y="135" width="18" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="B:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-qH-5WD">
+                                                    <rect key="frame" x="8" y="173" width="18" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view appearanceType="aqua" tag="8" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aZY-fK-XFr">
+                                                    <rect key="frame" x="0.0" y="1" width="320" height="89"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5O-Yp-L0j">
+                                                    <rect key="frame" x="92" y="207" width="102" height="30"/>
+                                                    <state key="normal" title="Set RGB Color">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="setRGBColor:" destination="onW-f8-yu9" eventType="touchUpInside" id="bfn-DN-jC7"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="2OL-Nf-bdr" kind="show" id="4vr-uJ-ujE"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell appearanceType="aqua" contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" indentationWidth="10" id="dHx-bi-2yT">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dHx-bi-2yT" id="Igk-8q-jTG">
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -252,72 +310,13 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="toggleSwitch" destination="OPg-bE-bVT" id="NF8-G8-ERo"/>
+                        <outlet property="scoutNameLabel" destination="qq2-E9-TD5" id="NW1-vx-HVg"/>
+                        <outlet property="toggleSwitch" destination="yyq-JQ-vES" id="o37-cT-4CI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wAJ-aK-k8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1092" y="1067"/>
-        </scene>
-        <!--Color View Controller-->
-        <scene sceneID="crE-ch-wkq">
-            <objects>
-                <viewController id="2OL-Nf-bdr" customClass="LEDColorViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fo6-EF-8Zj"/>
-                        <viewControllerLayoutGuide type="bottom" id="7uw-HD-O7v"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QD7-jT-d5V">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <slider appearanceType="aqua" opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="200" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="pMI-gV-SFK">
-                                <rect key="frame" x="33" y="263" width="269" height="31"/>
-                                <connections>
-                                    <action selector="rgbChanged:" destination="2OL-Nf-bdr" eventType="valueChanged" id="9GM-Xn-r4s"/>
-                                </connections>
-                            </slider>
-                            <slider appearanceType="aqua" opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="7KP-ZG-O1E">
-                                <rect key="frame" x="33" y="225" width="269" height="31"/>
-                                <connections>
-                                    <action selector="rgbChanged:" destination="2OL-Nf-bdr" eventType="valueChanged" id="hzo-hA-bfO"/>
-                                </connections>
-                            </slider>
-                            <slider appearanceType="aqua" opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="45" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="G87-GO-gtP">
-                                <rect key="frame" x="33" y="301" width="269" height="31"/>
-                                <connections>
-                                    <action selector="rgbChanged:" destination="2OL-Nf-bdr" eventType="valueChanged" id="ohU-NU-Z6j"/>
-                                </connections>
-                            </slider>
-                            <view appearanceType="aqua" tag="8" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kkc-s3-20g">
-                                <rect key="frame" x="20" y="68" width="280" height="134"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="R:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISW-Pn-iFo">
-                                <rect key="frame" x="10" y="229" width="17" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="G:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GF8-VJ-IMd">
-                                <rect key="frame" x="10" y="267" width="18" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="B:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6j-Ls-Vcv">
-                                <rect key="frame" x="10" y="305" width="18" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="efE-am-pen" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1502" y="1067"/>
+            <point key="canvasLocation" x="1092" y="1066"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jwf-H4-VtO">
@@ -340,6 +339,6 @@
     </scenes>
     <resources>
         <image name="Settings" width="48" height="48"/>
-        <image name="pinocciologo.png" width="500" height="128"/>
+        <image name="pinocciologo" width="500" height="128"/>
     </resources>
 </document>

@@ -64,7 +64,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 - (IBAction)moreActions:(id)sender {
-    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Title" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Logout" otherButtonTitles:@"Goto HQ", nil];
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Logout" otherButtonTitles:@"Goto HQ", nil];
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [popupQuery showInView:self.view];
 }
@@ -72,7 +72,6 @@
     NSLog(@"Token: %@",token);
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/troops?token=%@",token]];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
-    NSLog(@"%@",dict);
     return  dict;
 }
 -(NSString *)token {
