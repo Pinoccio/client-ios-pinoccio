@@ -34,16 +34,24 @@
     hud.labelText = @"Getting scouts...";
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self reloadScouts];
-        [self.tableView reloadData];
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     });
 }
 -(void)reloadScouts {
-    NSString *urlString = [NSString stringWithFormat:@"https://api.pinocc.io/v1/1/scouts?token=%@",self.token];
-    globalScoutList = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]] options:0 error:nil];
-    NSLog(@"%@",globalScoutList);
+    NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/scouts?token=%@",self.token]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!error){
+                                   globalScoutList = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                               }
+                               [self.tableView reloadData];
+                               [MBProgressHUD hideHUDForView:self.view animated:YES];
+                               
+                           }];
 }
 - (void)didReceiveMemoryWarning
 {

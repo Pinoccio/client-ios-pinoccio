@@ -27,11 +27,6 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] == nil) {
-        [self performSegueWithIdentifier:@"loginSegue" sender:self];
-    }else {
-        [self checkLogin];
-    }
 }
 -(void)checkLogin {
     NSString *tempTokenStorage = [self token];
@@ -57,6 +52,11 @@
 {
     [super viewDidLoad];
     globalTroopDict = [[NSMutableDictionary alloc] init];
+    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] == nil) {
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }else {
+        [self checkLogin];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -64,7 +64,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 - (IBAction)moreActions:(id)sender {
-    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Logout" otherButtonTitles:@"Goto HQ", nil];
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Goto HQ", nil];
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [popupQuery showInView:self.view];
 }
@@ -148,9 +148,7 @@
         [self checkLogin];
 
     } else if (buttonIndex == 1) {
-        NSLog(@"OPen 1");
-    } else if (buttonIndex == 2) {
-        NSLog(@"OPen 2");
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
     }
 }
 

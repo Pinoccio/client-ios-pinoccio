@@ -59,12 +59,20 @@
         [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
         [self.navigationController popViewControllerAnimated:YES];
     }else {
-        globalScoutDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
-        if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
-            [self.toggleSwitch setOn:NO];
-        }else {
-            [self.toggleSwitch setOn:YES];
-        }
+        NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if (!error){
+                                       globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                   }
+                                   if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
+                                       [self.toggleSwitch setOn:NO];
+                                   }else {
+                                       [self.toggleSwitch setOn:YES];
+                                   }
+                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
+                               }];
     }
 }
 - (IBAction)onoffSwitch:(id)sender {
@@ -76,25 +84,30 @@
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Running...";
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        globalScoutDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-    });
-    NSLog(@"%@",globalScoutDict);
+    NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!error){
+                                   globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                               }
+                               [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+                        }];
 }
 - (IBAction)setRGBColor:(id)sender {
     NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.setRGB(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Running...";
-    dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        globalScoutDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
-        NSLog(@"%@",globalScoutDict);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-        });
-    });
+    NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (!error){
+                                   globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                               }
+                               [MBProgressHUD hideHUDForView:self.view animated:YES];
+                           }];
 }
 - (IBAction)rgbChanged:(id)sender {
     UIView *preview = [self.view viewWithTag:8];
