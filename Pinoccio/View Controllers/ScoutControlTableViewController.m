@@ -61,18 +61,37 @@
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                    if (!error){
                                        globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                       if (globalScoutDict[@"error"] == nil) {
+                                           if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
+                                               [self.toggleSwitch setOn:NO];
+                                               [self setEverythingOff];
+                                           }else {
+                                               [self.toggleSwitch setOn:YES];
+                                           }
+                                       }else {
+                                           [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                           [self.navigationController popViewControllerAnimated:YES];
+                                       }
+                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                       NSLog(@"%@",globalScoutDict);
                                    }else {
+                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                        [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
                                        [self.navigationController popViewControllerAnimated:YES];
+                                       
                                    }
-                                   if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
-                                       [self.toggleSwitch setOn:NO];
-                                   }else {
-                                       [self.toggleSwitch setOn:YES];
-                                   }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                   
                                }];
 
+}
+-(void)setEverythingOff{
+    [(UISlider*)[self.view viewWithTag:5] setValue:0 animated:YES];
+    [(UISlider*)[self.view viewWithTag:6] setValue:0 animated:YES];
+    [(UISlider*)[self.view viewWithTag:7] setValue:0 animated:YES];
+    [(UILabel *) [self.view viewWithTag:9] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:5] value]]];
+    [(UILabel *) [self.view viewWithTag:10] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:6] value]]];
+    [(UILabel *) [self.view viewWithTag:11] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:7] value]]];
+    [(UIView *)[self.view viewWithTag:8]setBackgroundColor:[UIColor blackColor]];
 }
 - (IBAction)onoffSwitch:(id)sender {
     NSURL *urlString;
@@ -80,6 +99,7 @@
          urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.on?token=%@",self.scoutID,self.token]];
     }else {
         urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.off?token=%@",self.scoutID,self.token]];
+        [self setEverythingOff];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Running...";
@@ -109,8 +129,11 @@
                            }];
 }
 - (IBAction)rgbChanged:(id)sender {
-    UIView *preview = [self.view viewWithTag:8];
-    preview.backgroundColor = [UIColor colorWithRed:[(UISlider*)[self.view viewWithTag:5] value]/255 green:[(UISlider*)[self.view viewWithTag:6] value]/255 blue:[(UISlider*)[self.view viewWithTag:7] value]/255 alpha:1];
+    // I'm in love with this code
+    [(UILabel *) [self.view viewWithTag:9] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:5] value]]];
+    [(UILabel *) [self.view viewWithTag:10] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:6] value]]];
+    [(UILabel *) [self.view viewWithTag:11] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:7] value]]];
+    [(UIView *)[self.view viewWithTag:8]setBackgroundColor:[UIColor colorWithRed:[(UISlider*)[self.view viewWithTag:5] value]/255 green:[(UISlider*)[self.view viewWithTag:6] value]/255 blue:[(UISlider*)[self.view viewWithTag:7] value]/255 alpha:1]];
 }
 
 /*
