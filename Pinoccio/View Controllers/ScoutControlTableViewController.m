@@ -55,16 +55,15 @@
 }
 -(void)getInitial{
     NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print led.isoff?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    if ([NSData dataWithContentsOfURL:urlString] == nil) {
-        [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
-        [self.navigationController popViewControllerAnimated:YES];
-    }else {
         NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
         [NSURLConnection sendAsynchronousRequest:request
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                    if (!error){
                                        globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                   }else {
+                                       [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                       [self.navigationController popViewControllerAnimated:YES];
                                    }
                                    if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
                                        [self.toggleSwitch setOn:NO];
@@ -73,7 +72,7 @@
                                    }
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }];
-    }
+
 }
 - (IBAction)onoffSwitch:(id)sender {
     NSURL *urlString;
@@ -92,7 +91,6 @@
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
-
                         }];
 }
 - (IBAction)setRGBColor:(id)sender {
@@ -105,6 +103,7 @@
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (!error){
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                   [self getInitial];
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                            }];
