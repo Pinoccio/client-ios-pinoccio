@@ -86,7 +86,7 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Copyright © Pinoccio 2014";
+    return @"Copyright © Pinoccio & Haifisch 2014";
 }
 
 /*

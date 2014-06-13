@@ -13,6 +13,9 @@
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *scoutName;
 @property (strong, nonatomic) IBOutlet UILabel *scoutNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *batteryPercent;
+@property (strong, nonatomic) IBOutlet UILabel *isLeadScout;
+@property (strong, nonatomic) IBOutlet UILabel *temperature;
 
 
 @end

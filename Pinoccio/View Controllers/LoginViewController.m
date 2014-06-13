@@ -40,7 +40,11 @@
 - (IBAction)login:(id)sender {
     [JNKeychain saveValue:[(UITextField*)[self.view viewWithTag:1] text] forKey:@"PinoccioKeychainUsername"];
     [JNKeychain saveValue:[(UITextField*)[self.view viewWithTag:2] text] forKey:@"PinoccioKeychainPassword"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (SYSTEM_VERSION_EQUAL_TO(@"8.0")) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if ([textField tag] == 1) {

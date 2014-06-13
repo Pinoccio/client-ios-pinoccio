@@ -11,6 +11,7 @@
 @interface MainTableViewController (){
     NSString *globalToken;
     NSMutableDictionary *globalTroopDict;
+    NSArray *otherOptions;
 }
 
 @end
@@ -62,18 +63,14 @@
 {
     [super viewDidLoad];
     globalTroopDict = [[NSMutableDictionary alloc] init];
-    
+    otherOptions = [NSArray arrayWithObjects:@"Goto HQ",@"Logout", nil];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-- (IBAction)moreActions:(id)sender {
-    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Goto HQ", nil];
-    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [popupQuery showInView:self.view];
-}
+
 -(NSDictionary *)allTroopsFor:(NSString *)token {
     NSLog(@"Token: %@",token);
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/troops?token=%@",token]];
@@ -120,27 +117,49 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[globalTroopDict objectForKey:@"data"] count];
+    if (section == 0) {
+        return [[globalTroopDict objectForKey:@"data"] count];
+    }else {
+        return otherOptions.count;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TroopCell" forIndexPath:indexPath];
-    cell.textLabel.text = globalTroopDict[@"data"][indexPath.row][@"name"];
-    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (indexPath.section == 0){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TroopCell" forIndexPath:indexPath];
+        cell.textLabel.text = globalTroopDict[@"data"][indexPath.row][@"name"];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
+
+    }else {
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        cell.textLabel.text = otherOptions[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (indexPath.row == [otherOptions count] - 1) {
+            cell.backgroundColor = [UIColor redColor];
+            cell.textLabel.textColor = [UIColor whiteColor];
+        }
+        return  cell;
+    }
     // Configure the cell...
     
-    return cell;
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Copyright © Pinoccio 2014";
+    if (section == 1) {
+        return @"Copyright © Pinoccio 2014";
+    }else
+    {
+        return nil;
+    }
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
@@ -150,19 +169,26 @@
         globalToken = nil;
         [self checkLogin:YES];
 
-    } else if (buttonIndex == 1) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 100;
+    if (section == 0) {
+        return 100;
+    }else {
+        return 20;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-    UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 260, 67)];
-    pinoccioLogo.image = [UIImage imageNamed:@"pinocciologo"];
-    [header addSubview:pinoccioLogo];
-    return header;
+    if (section == 0) {
+        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+        UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 260, 67)];
+        pinoccioLogo.image = [UIImage imageNamed:@"pinocciologo"];
+        [header addSubview:pinoccioLogo];
+        return header;
+    }else {
+        return nil;
+    }
+    
 }
 /*
 // Override to support conditional editing of the table view.
@@ -202,13 +228,32 @@
 }
 */
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Logout" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:nil, nil];
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    if (indexPath.section == 1){
+        switch (indexPath.row) {
+            case 0:
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
+                break;
+            case 1:
+                [popupQuery showInView:self.view];
+                break;
+            default:
+                break;
+        }
+    }else if (indexPath.section == 0){
+        [self performSegueWithIdentifier:@"gotoScout" sender:self];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier  isEqual: @"scoutListSegue"]) {
+    if ([segue.identifier  isEqual: @"gotoScout"]) {
         ScoutListTableViewController *scoutList = [segue destinationViewController];
         UITableViewCell *selectedCell = (UITableViewCell *)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
