@@ -44,6 +44,7 @@
             hud.labelText = @"Getting troops...";
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
+                NSLog(@"%@",globalTroopDict);
                 [self.tableView reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -64,6 +65,8 @@
     [super viewDidLoad];
     globalTroopDict = [[NSMutableDictionary alloc] init];
     otherOptions = [NSArray arrayWithObjects:@"Goto HQ",@"Logout", nil];
+    
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -72,7 +75,6 @@
 }
 
 -(NSDictionary *)allTroopsFor:(NSString *)token {
-    NSLog(@"Token: %@",token);
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/troops?token=%@",token]];
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil];
     return  dict;
@@ -183,6 +185,7 @@
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
         UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 260, 67)];
         pinoccioLogo.image = [UIImage imageNamed:@"pinocciologo"];
+        
         [header addSubview:pinoccioLogo];
         return header;
     }else {
@@ -255,9 +258,8 @@
 {
     if ([segue.identifier  isEqual: @"gotoScout"]) {
         ScoutListTableViewController *scoutList = [segue destinationViewController];
-        UITableViewCell *selectedCell = (UITableViewCell *)sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
-        scoutList.troopID = [[[globalTroopDict objectForKey:@"data"] objectAtIndex:indexPath.row] objectForKey:@"token"];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        scoutList.troopID = [[[globalTroopDict objectForKey:@"data"] objectAtIndex:indexPath.row] objectForKey:@"id"];
         scoutList.token = globalToken;
     }
 }

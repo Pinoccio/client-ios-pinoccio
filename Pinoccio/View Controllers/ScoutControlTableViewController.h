@@ -8,14 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "AXWireButton.h"
+#import "Globals.h"
+
 @interface ScoutControlTableViewController : UITableViewController
 @property (strong,nonatomic) NSString *scoutID;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *scoutName;
+@property (strong, nonatomic) NSString *troopID;
+
 @property (strong, nonatomic) IBOutlet UILabel *scoutNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *batteryPercent;
 @property (strong, nonatomic) IBOutlet UILabel *isLeadScout;
 @property (strong, nonatomic) IBOutlet UILabel *temperature;
+@property (strong, nonatomic) IBOutlet AXWireButton *setRGBButton;
 
 
 @end

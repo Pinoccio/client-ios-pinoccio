@@ -29,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.setRGBButton.highlightStyle = AXWireButtonHighlightStyleFilled;
+    self.setRGBButton.borderWidth = 1;
     self.title = self.scoutName;
     self.scoutNameLabel.text = self.scoutName;
     globalScoutDict = [[NSMutableDictionary alloc] init];
@@ -54,12 +56,17 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)getInitial{
-    NSURL *urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print led.isoff?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:urlString]
+    NSURL *urlString;
+    __block UIAlertView *alert;
+    if (![(UISwitch *) [self.view viewWithTag:13] isOn]) {
+        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/print led.isoff?token=%@",self.troopID,self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:urlString]
                                            queue:[NSOperationQueue mainQueue]
                                completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                    if (!error){
                                        globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                       if(debug)NSLog(@"Scout control Dictionary: %@", globalScoutDict);
+
                                        if (globalScoutDict[@"error"] == nil) {
                                            if ([globalScoutDict[@"data"][@"reply"] integerValue] == 1) {
                                                [self.toggleSwitch setOn:NO];
@@ -68,18 +75,29 @@
                                                [self.toggleSwitch setOn:YES];
                                            }
                                        }else {
-                                           [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                           if (alert == nil) {
+                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                               [alert show];
+                                           }
+                                           
                                            [self.navigationController popViewControllerAnimated:YES];
                                        }
                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    }else {
                                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                       [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                       if (alert == nil) {
+                                           alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                           [alert show];
+                                       }
                                        [self.navigationController popViewControllerAnimated:YES];
-                                       
+
                                    }
                                }];
-    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print power.percent?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+
+    }else {
+        [self.toggleSwitch setOn:YES];
+    }
+        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/print power.percent?token=%@",self.troopID,self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:urlString]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -88,18 +106,23 @@
                                    if (globalScoutDict[@"error"] == nil) {
                                        self.batteryPercent.text = [NSString stringWithFormat:@"%ld%%", (long)[globalScoutDict[@"data"][@"reply"] integerValue]];
                                    }else {
-                                       [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                       if (alert == nil) {
+                                           alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                           [alert show];
+                                       }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                   [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                   if (alert == nil) {
+                                       alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                       [alert show];
+                                   }
                                    [self.navigationController popViewControllerAnimated:YES];
-                                   
+
                                }
                            }];
-    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print scout.isleadscout?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/print scout.isleadscout?token=%@",self.troopID,self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:urlString]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -116,61 +139,76 @@
                                                break;
                                        }
                                    }else {
-                                       [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                       if (alert == nil) {
+                                           alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                           [alert show];
+                                       }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                   [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                   if (alert == nil) {
+                                       alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                       [alert show];
+                                   }
                                    [self.navigationController popViewControllerAnimated:YES];
-                                   
+
                                }
                            }];
-    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print temperature.f?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    __block NSString *temperature;
+    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/print temperature.f?token=%@",self.troopID,self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:urlString]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (!error){
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                    if (globalScoutDict[@"error"] == nil) {
-                                       self.temperature.text = [NSString stringWithFormat:@"%ld°F", (long)[globalScoutDict[@"data"][@"reply"] integerValue]];
+                                       temperature = [NSString stringWithFormat:@"%ld°F", (long)[globalScoutDict[@"data"][@"reply"] integerValue]];
 
                                    }else {
-                                       [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                       if (alert == nil) {
+                                           alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                           [alert show];
+                                       }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                   [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                   if (alert == nil) {
+                                       alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                       [alert show];
+                                   }
                                    [self.navigationController popViewControllerAnimated:YES];
-                                   
                                }
                            }];
-    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/print temperature.c?token=%@",self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/print temperature.c?token=%@",self.troopID,self.scoutID,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:urlString]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (!error){
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                    if (globalScoutDict[@"error"] == nil) {
-                                       self.temperature.text = [NSString stringWithFormat:@"%@ / %ld°C", self.temperature.text ,[globalScoutDict[@"data"][@"reply"] integerValue]];
+                                       self.temperature.text = [NSString stringWithFormat:@"%@ / %ld°C", temperature ,(long)[globalScoutDict[@"data"][@"reply"] integerValue]];
                                        
                                    }else {
-                                       [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                       if (alert == nil) {
+                                           alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                           [alert show];
+                                       }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
                                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                   [[[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+                                   if (alert == nil) {
+                                       alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                       [alert show];
+                                   }
                                    [self.navigationController popViewControllerAnimated:YES];
-                                   
                                }
                            }];
-
-
 }
 -(void)setEverythingOff{
     [(UISlider*)[self.view viewWithTag:5] setValue:0 animated:YES];
@@ -180,13 +218,16 @@
     [(UILabel *) [self.view viewWithTag:10] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:6] value]]];
     [(UILabel *) [self.view viewWithTag:11] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:7] value]]];
     [(UIView *)[self.view viewWithTag:8]setBackgroundColor:[UIColor blackColor]];
+    [(UISwitch *) [self.view viewWithTag:13] setOn:NO animated:YES];
+    [(UISwitch *) [self.view viewWithTag:12] setOn:NO animated:YES];
+
 }
 - (IBAction)onoffSwitch:(id)sender {
     NSURL *urlString;
     if ([(UISwitch *)sender isOn]) {
-         urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.on?token=%@",self.scoutID,self.token]];
+         urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.on?token=%@",self.troopID,self.scoutID,self.token]];
     }else {
-        urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.off?token=%@",self.scoutID,self.token]];
+        urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.off?token=%@",self.troopID,self.scoutID,self.token]];
         [self setEverythingOff];
     }
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -203,17 +244,12 @@
 }
 - (IBAction)setRGBColor:(id)sender {
     NSURL *urlString;
-    /* Need to properly handle blinking
     
-     if ([(UISwitch *) [self.view viewWithTag:12] isOn]) {
-        if ([(UISwitch *) [self.view viewWithTag:13] isOn]) {
-            urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.blink(%.0f,%.0f,%.0f,500,1)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        }else {
-            urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.blink(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        }
+    if ([(UISwitch *) [self.view viewWithTag:13] isOn]) {
+        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.blink(%.0f,%.0f,%.0f,500,1)?token=%@",self.troopID,self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }else {
-    }*/
-    urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/%@/command/led.setRGB(%.0f,%.0f,%.0f)?token=%@",self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.setrgb(%.0f,%.0f,%.0f)?token=%@",self.troopID,self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Running...";
@@ -224,7 +260,7 @@
                                if (!error){
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                    NSLog(@"%@",globalScoutDict);
-                                   [self getInitial];
+                                   [self performSelectorInBackground:@selector(getInitial) withObject:nil];
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                            }];

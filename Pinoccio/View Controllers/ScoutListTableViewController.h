@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ScoutControlTableViewController.h"
 #import "MBProgressHUD.h"
+#import "Globals.h"
+
 @interface ScoutListTableViewController : UITableViewController
 @property (strong, nonatomic) NSString *troopID;
 @property (strong, nonatomic) NSString *token;

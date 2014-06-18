@@ -18,6 +18,7 @@
 		B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */; };
 		B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */; };
 		B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7FC19443DC800711E54 /* MBProgressHUD.m */; };
+		D0F20B5EB45646BF8B67059A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2D2F87603874ADD9846AA54 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		97B4037FF4194ADBB0439E20 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B9060B6A19440FF7000AC166 /* Pinoccio HQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pinoccio HQ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9060B6E19440FF7000AC166 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9060B6F19440FF7000AC166 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,12 +49,14 @@
 		B9060BDB1944235F000AC166 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B9060BDD194423EB000AC166 /* JNKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNKeychain.h; sourceTree = "<group>"; };
 		B9060BDE194423EB000AC166 /* JNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychain.m; sourceTree = "<group>"; };
+		B9704DF819509C85003A4DA2 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = "View Controllers/Globals.h"; sourceTree = "<group>"; };
 		B9DCD7F519442E7400711E54 /* ScoutListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoutListTableViewController.h; sourceTree = "<group>"; };
 		B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoutListTableViewController.m; sourceTree = "<group>"; };
 		B9DCD7F819443AD100711E54 /* ScoutControlTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoutControlTableViewController.h; sourceTree = "<group>"; };
 		B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoutControlTableViewController.m; sourceTree = "<group>"; };
 		B9DCD7FB19443DC800711E54 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		B9DCD7FC19443DC800711E54 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E2D2F87603874ADD9846AA54 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0F20B5EB45646BF8B67059A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +84,8 @@
 				B9060B6C19440FF7000AC166 /* Pinoccio */,
 				B9060B8319440FF7000AC166 /* PinoccioTests */,
 				B9060B6B19440FF7000AC166 /* Products */,
+				97B4037FF4194ADBB0439E20 /* Pods.xcconfig */,
+				D99794EF2C2D405891314C86 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +104,7 @@
 				B9060B7A19440FF7000AC166 /* Images.xcassets */,
 				B9060B7119440FF7000AC166 /* AppDelegate.h */,
 				B9060B7219440FF7000AC166 /* AppDelegate.m */,
+				B9704DF819509C85003A4DA2 /* Globals.h */,
 				B9060B7719440FF7000AC166 /* Main.storyboard */,
 				B9DCD7FF19443DD300711E54 /* Libraries */,
 				B9060BE1194423F8000AC166 /* View Controllers */,
@@ -173,6 +181,14 @@
 			path = Libraries;
 			sourceTree = "<group>";
 		};
+		D99794EF2C2D405891314C86 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E2D2F87603874ADD9846AA54 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -180,9 +196,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9060B8A19440FF7000AC166 /* Build configuration list for PBXNativeTarget "Pinoccio HQ" */;
 			buildPhases = (
+				308DB611CDB244D98393D25A /* Check Pods Manifest.lock */,
 				B9060B6619440FF7000AC166 /* Sources */,
 				B9060B6719440FF7000AC166 /* Frameworks */,
 				B9060B6819440FF7000AC166 /* Resources */,
+				FFAD864631694DC1B4AEF0C4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -222,6 +240,7 @@
 				TargetAttributes = {
 					B9060B6919440FF7000AC166 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 98H7WCU496;
 					};
 					B9060B7F19440FF7000AC166 = {
 						CreatedOnToolsVersion = 6.0;
@@ -266,6 +285,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		308DB611CDB244D98393D25A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FFAD864631694DC1B4AEF0C4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B9060B6619440FF7000AC166 /* Sources */ = {
@@ -391,25 +443,33 @@
 		};
 		B9060B8B19440FF7000AC166 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97B4037FF4194ADBB0439E20 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Pinoccio HQ";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		B9060B8C19440FF7000AC166 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 97B4037FF4194ADBB0439E20 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Pinoccio HQ";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "JNKeychain.h"
 #import "MBProgressHUD.h"
+#import "Globals.h"
 @interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @end

@@ -15,7 +15,6 @@
 @end
 
 @implementation ScoutListTableViewController
-@synthesize troopID = troopID;
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -40,13 +39,15 @@
     });
 }
 -(void)reloadScouts {
-    NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/1/scouts?token=%@",self.token]];
+    NSLog(@"%@", self.troopID);
+    NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/scouts?token=%@",self.troopID,self.token]];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (!error){
                                    globalScoutList = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                   if(debug)NSLog(@"Scout list Dictionary: %@", globalScoutList);
                                }
                                [self.tableView reloadData];
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -86,7 +87,7 @@
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"Copyright © Pinoccio & Haifisch 2014";
+    return @"Copyright © Pinoccio 2014";
 }
 
 /*
@@ -137,6 +138,7 @@
     UITableViewCell *selectedCell = (UITableViewCell *)sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedCell];
     destController.token = self.token;
+    destController.troopID = self.troopID;
     destController.scoutID = globalScoutList[@"data"][indexPath.row][@"id"];
     destController.scoutName = globalScoutList[@"data"][indexPath.row][@"name"];
     // Get the new view controller using [segue destinationViewController].
