@@ -12,6 +12,10 @@
 #import "JNKeychain.h"
 #import "MBProgressHUD.h"
 #import "Globals.h"
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "UARTPeripheral.h"
+#import "UARTViewController.h"
+
 @interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 
 @end

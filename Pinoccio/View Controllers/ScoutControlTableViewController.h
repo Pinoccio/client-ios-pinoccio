@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
 #import "AXWireButton.h"
+#import "NKOColorPickerView.h"
 #import "Globals.h"
+#import "ConsoleViewController.h"
 
 @interface ScoutControlTableViewController : UITableViewController
 @property (strong,nonatomic) NSString *scoutID;
@@ -22,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *isLeadScout;
 @property (strong, nonatomic) IBOutlet UILabel *temperature;
 @property (strong, nonatomic) IBOutlet AXWireButton *setRGBButton;
+@property (strong, nonatomic) IBOutlet AXWireButton *openConsole;
 
 
 @end

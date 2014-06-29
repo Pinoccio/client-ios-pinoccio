@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B9060B6919440FF7000AC166"
-               BuildableName = "Pinoccio HQ.app"
-               BlueprintName = "Pinoccio HQ"
-               ReferencedContainer = "container:Pinoccio HQ.xcodeproj">
+               BuildableName = "Pinoccio.app"
+               BlueprintName = "Pinoccio"
+               ReferencedContainer = "container:Pinoccio.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B9060B7F19440FF7000AC166"
-               BuildableName = "Pinoccio HQTests.xctest"
-               BlueprintName = "Pinoccio HQTests"
-               ReferencedContainer = "container:Pinoccio HQ.xcodeproj">
+               BuildableName = "PinoccioTests.xctest"
+               BlueprintName = "PinoccioTests"
+               ReferencedContainer = "container:Pinoccio.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B9060B6919440FF7000AC166"
-            BuildableName = "Pinoccio HQ.app"
-            BlueprintName = "Pinoccio HQ"
-            ReferencedContainer = "container:Pinoccio HQ.xcodeproj">
+            BuildableName = "Pinoccio.app"
+            BlueprintName = "Pinoccio"
+            ReferencedContainer = "container:Pinoccio.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B9060B6919440FF7000AC166"
-            BuildableName = "Pinoccio HQ.app"
-            BlueprintName = "Pinoccio HQ"
-            ReferencedContainer = "container:Pinoccio HQ.xcodeproj">
+            BuildableName = "Pinoccio.app"
+            BlueprintName = "Pinoccio"
+            ReferencedContainer = "container:Pinoccio.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B9060B6919440FF7000AC166"
-            BuildableName = "Pinoccio HQ.app"
-            BlueprintName = "Pinoccio HQ"
-            ReferencedContainer = "container:Pinoccio HQ.xcodeproj">
+            BuildableName = "Pinoccio.app"
+            BlueprintName = "Pinoccio"
+            ReferencedContainer = "container:Pinoccio.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

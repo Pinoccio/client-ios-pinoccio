@@ -25,14 +25,9 @@
     }
     return self;
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.setRGBButton.highlightStyle = AXWireButtonHighlightStyleFilled;
-    self.setRGBButton.borderWidth = 1;
-    self.title = self.scoutName;
-    self.scoutNameLabel.text = self.scoutName;
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
     globalScoutDict = [[NSMutableDictionary alloc] init];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"Loading...";
@@ -42,12 +37,16 @@
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     });
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.setRGBButton.highlightStyle = AXWireButtonHighlightStyleFilled;
+    self.setRGBButton.borderWidth = 1;
+    self.openConsole.highlightStyle = AXWireButtonHighlightStyleFilled;
+    self.openConsole.borderWidth = 1;
+    self.title = self.scoutName;
+    self.scoutNameLabel.text = self.scoutName;
 }
 
 - (void)didReceiveMemoryWarning
@@ -259,7 +258,6 @@
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                if (!error){
                                    globalScoutDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                   NSLog(@"%@",globalScoutDict);
                                    [self performSelectorInBackground:@selector(getInitial) withObject:nil];
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -272,5 +270,12 @@
     [(UILabel *) [self.view viewWithTag:11] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:7] value]]];
     [(UIView *)[self.view viewWithTag:8]setBackgroundColor:[UIColor colorWithRed:[(UISlider*)[self.view viewWithTag:5] value]/255 green:[(UISlider*)[self.view viewWithTag:6] value]/255 blue:[(UISlider*)[self.view viewWithTag:7] value]/255 alpha:1]];
 }
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ConsoleViewController *destController = [segue destinationViewController];
+    destController.token = self.token;
+    destController.troopID = self.troopID;
+    destController.scoutID = self.scoutID;
+    // Pass the selected object to the new view controller.
+}
 @end

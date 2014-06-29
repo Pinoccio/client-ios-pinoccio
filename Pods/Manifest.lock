@@ -1,0 +1,13 @@
+PODS:
+  - AXWireButton (0.1.8)
+  - NKOColorPickerView (0.2)
+
+DEPENDENCIES:
+  - AXWireButton
+  - NKOColorPickerView
+
+SPEC CHECKSUMS:
+  AXWireButton: 8bfd41423b2f1c0327b553ee29d53f0ba2e448fc
+  NKOColorPickerView: b4d32e1eedfcaeaec890f8301081ee030d49cffd
+
+COCOAPODS: 0.33.1

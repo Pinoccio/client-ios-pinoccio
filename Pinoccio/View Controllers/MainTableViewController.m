@@ -7,11 +7,21 @@
 //
 
 #import "MainTableViewController.h"
+#import "UARTPeripheral.h"
+#import <QuartzCore/QuartzCore.h>
+#import "NSString+hex.h"
+#import "NSData+hex.h"
 
+#define CONNECTING_TEXT @"Connecting…"
+#define DISCONNECTING_TEXT @"Disconnecting…"
+#define DISCONNECT_TEXT @"Disconnect"
+#define CONNECT_TEXT @"Connect"
 @interface MainTableViewController (){
     NSString *globalToken;
     NSMutableDictionary *globalTroopDict;
     NSArray *otherOptions;
+   
+
 }
 
 @end
@@ -33,6 +43,10 @@
     }else {
         [self checkLogin:NO];
     }
+    
+    
+    //[self performSegueWithIdentifier:@"submitIssue" sender:self];
+
 }
 -(void)checkLogin:(BOOL)loggedOut {
     if (globalToken == nil) {
@@ -44,7 +58,6 @@
             hud.labelText = @"Getting troops...";
             dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
                 globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
-                NSLog(@"%@",globalTroopDict);
                 [self.tableView reloadData];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -64,7 +77,7 @@
 {
     [super viewDidLoad];
     globalTroopDict = [[NSMutableDictionary alloc] init];
-    otherOptions = [NSArray arrayWithObjects:@"Goto HQ",@"Logout", nil];
+    otherOptions = [NSArray arrayWithObjects:@"Bluetooth console", @"Goto HQ",@"Logout", nil];
     
     
     // Uncomment the following line to preserve selection between presentations.
@@ -237,9 +250,12 @@
     if (indexPath.section == 1){
         switch (indexPath.row) {
             case 0:
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
+                [self performSegueWithIdentifier:@"bluetoothConsole" sender:self];
                 break;
             case 1:
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
+                break;
+            case 2:
                 [popupQuery showInView:self.view];
                 break;
             default:

@@ -39,7 +39,6 @@
     });
 }
 -(void)reloadScouts {
-    NSLog(@"%@", self.troopID);
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/scouts?token=%@",self.troopID,self.token]];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlString];
     [NSURLConnection sendAsynchronousRequest:request

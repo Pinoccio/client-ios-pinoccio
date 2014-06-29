@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 Haifisch. All rights reserved.
 //
 #warning CHANGE ME BEFORE YOU LAUNCH PL0X
-#define debug 1
+#define debug 0
