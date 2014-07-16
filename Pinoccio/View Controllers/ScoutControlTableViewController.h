@@ -12,6 +12,8 @@
 #import "NKOColorPickerView.h"
 #import "Globals.h"
 #import "ConsoleViewController.h"
+#import "ColorSettingsViewController.h"
+
 
 @interface ScoutControlTableViewController : UITableViewController
 @property (strong,nonatomic) NSString *scoutID;
@@ -25,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *temperature;
 @property (strong, nonatomic) IBOutlet AXWireButton *setRGBButton;
 @property (strong, nonatomic) IBOutlet AXWireButton *openConsole;
-
+@property (strong, nonatomic) IBOutlet AXWireButton *setColor;
+@property(nonatomic,assign)id delegate;
 
 @end

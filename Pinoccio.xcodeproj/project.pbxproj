@@ -16,6 +16,8 @@
 		B9060BDC1944235F000AC166 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BDB1944235F000AC166 /* LoginViewController.m */; };
 		B9060BDF194423EB000AC166 /* JNKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BDE194423EB000AC166 /* JNKeychain.m */; };
 		B921792F19587C7400FC698F /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B921792E19587C7400FC698F /* ConsoleViewController.m */; };
+		B94315BA1967BBF7004FE579 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94315B81967BBF7004FE579 /* Main-iPad.storyboard */; };
+		B94806971961082F00E4EBB7 /* ColorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */; };
 		B9D989DD1955359700C9BFF3 /* IssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D989DC1955359700C9BFF3 /* IssueTableViewController.m */; };
 		B9D989DF1955388C00C9BFF3 /* libZendeskiPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D989DE1955388C00C9BFF3 /* libZendeskiPhone.a */; };
 		B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */; };
@@ -62,6 +64,9 @@
 		B9060BDE194423EB000AC166 /* JNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychain.m; sourceTree = "<group>"; };
 		B921792D19587C7400FC698F /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
 		B921792E19587C7400FC698F /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		B94315B91967BBF7004FE579 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
+		B94806951961082F00E4EBB7 /* ColorSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSettingsViewController.h; sourceTree = "<group>"; };
+		B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSettingsViewController.m; sourceTree = "<group>"; };
 		B9704DF819509C85003A4DA2 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = "View Controllers/Globals.h"; sourceTree = "<group>"; };
 		B9D989D91955340F00C9BFF3 /* ZendeskDropbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZendeskDropbox.h; sourceTree = "<group>"; };
 		B9D989DB1955359700C9BFF3 /* IssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueTableViewController.h; sourceTree = "<group>"; };
@@ -135,6 +140,7 @@
 		B9060B6C19440FF7000AC166 /* Pinoccio */ = {
 			isa = PBXGroup;
 			children = (
+				B937D3AE19648EEE004B274E /* iPad */,
 				B9D989D71955340F00C9BFF3 /* ZendeskDropboxLib */,
 				B9060B7A19440FF7000AC166 /* Images.xcassets */,
 				B9060B7119440FF7000AC166 /* AppDelegate.h */,
@@ -199,9 +205,19 @@
 				B9D989DC1955359700C9BFF3 /* IssueTableViewController.m */,
 				B921792D19587C7400FC698F /* ConsoleViewController.h */,
 				B921792E19587C7400FC698F /* ConsoleViewController.m */,
+				B94806951961082F00E4EBB7 /* ColorSettingsViewController.h */,
+				B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */,
 				B9EF8AAE195A611D008B154E /* Bluetooth */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B937D3AE19648EEE004B274E /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				B94315B81967BBF7004FE579 /* Main-iPad.storyboard */,
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 		B9D989D71955340F00C9BFF3 /* ZendeskDropboxLib */ = {
@@ -352,6 +368,7 @@
 			files = (
 				B9060B7919440FF7000AC166 /* Main.storyboard in Resources */,
 				B9060B7B19440FF7000AC166 /* Images.xcassets in Resources */,
+				B94315BA1967BBF7004FE579 /* Main-iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +431,7 @@
 				B9060BDF194423EB000AC166 /* JNKeychain.m in Sources */,
 				B9060B7019440FF7000AC166 /* main.m in Sources */,
 				B9EF8ABB195A617F008B154E /* UITextView+lineCount.m in Sources */,
+				B94806971961082F00E4EBB7 /* ColorSettingsViewController.m in Sources */,
 				B9D989DD1955359700C9BFF3 /* IssueTableViewController.m in Sources */,
 				B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */,
 				B9060BDC1944235F000AC166 /* LoginViewController.m in Sources */,
@@ -446,6 +464,14 @@
 				B9060B7819440FF7000AC166 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B94315B81967BBF7004FE579 /* Main-iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B94315B91967BBF7004FE579 /* Base */,
+			);
+			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -536,7 +562,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -544,6 +570,7 @@
 				);
 				PRODUCT_NAME = Pinoccio;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -556,7 +583,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -564,6 +591,7 @@
 				);
 				PRODUCT_NAME = Pinoccio;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

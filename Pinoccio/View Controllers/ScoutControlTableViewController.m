@@ -7,16 +7,16 @@
 //
 
 #import "ScoutControlTableViewController.h"
-
+#define previewCell [[self tableView] cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:1]]
 @interface ScoutControlTableViewController (){
     NSMutableDictionary *globalScoutDict;
+    NKOColorPickerView *colorPicker;
 }
 @property (strong, nonatomic) IBOutlet UISwitch *toggleSwitch;
 
 @end
 
 @implementation ScoutControlTableViewController
-
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -41,10 +41,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    colorPicker = (NKOColorPickerView *)[self.view viewWithTag:420];
     self.setRGBButton.highlightStyle = AXWireButtonHighlightStyleFilled;
     self.setRGBButton.borderWidth = 1;
     self.openConsole.highlightStyle = AXWireButtonHighlightStyleFilled;
     self.openConsole.borderWidth = 1;
+    self.setColor.highlightStyle = AXWireButtonHighlightStyleFilled;
+    self.setColor.borderWidth = 1;
     self.title = self.scoutName;
     self.scoutNameLabel.text = self.scoutName;
 }
@@ -75,7 +79,7 @@
                                            }
                                        }else {
                                            if (alert == nil) {
-                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:[NSString stringWithFormat:@"This scout seems to be unavailable, check back again later. More info: %@",error] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                                [alert show];
                                            }
                                            
@@ -243,11 +247,15 @@
 }
 - (IBAction)setRGBColor:(id)sender {
     NSURL *urlString;
-    
+    CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
+
+    [previewCell.backgroundColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    NSLog(@"%f,%f,%f",red,green,blue);
+
     if ([(UISwitch *) [self.view viewWithTag:13] isOn]) {
-        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.blink(%.0f,%.0f,%.0f,500,1)?token=%@",self.troopID,self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.blink(%.0f,%.0f,%.0f,500,1)?token=%@",self.troopID,self.scoutID,red*225,green*255,blue*255,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }else {
-        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.setrgb(%.0f,%.0f,%.0f)?token=%@",self.troopID,self.scoutID,[(UISlider*)[self.view viewWithTag:5]value],[(UISlider*)[self.view viewWithTag:6]value],[(UISlider*)[self.view viewWithTag:7]value],self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        urlString = [NSURL URLWithString:[[NSString stringWithFormat:@"https://api.pinocc.io/v1/%@/%@/command/led.setrgb(%.0f,%.0f,%.0f)?token=%@",self.troopID,self.scoutID,red*255,green*255,blue*255,self.token] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -263,19 +271,23 @@
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                            }];
 }
-- (IBAction)rgbChanged:(id)sender {
-    // I'm in love with this code
-    [(UILabel *) [self.view viewWithTag:9] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:5] value]]];
-    [(UILabel *) [self.view viewWithTag:10] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:6] value]]];
-    [(UILabel *) [self.view viewWithTag:11] setText:[NSString stringWithFormat:@"%.0f",[(UISlider*)[self.view viewWithTag:7] value]]];
-    [(UIView *)[self.view viewWithTag:8]setBackgroundColor:[UIColor colorWithRed:[(UISlider*)[self.view viewWithTag:5] value]/255 green:[(UISlider*)[self.view viewWithTag:6] value]/255 blue:[(UISlider*)[self.view viewWithTag:7] value]/255 alpha:1]];
-}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    ConsoleViewController *destController = [segue destinationViewController];
-    destController.token = self.token;
-    destController.troopID = self.troopID;
-    destController.scoutID = self.scoutID;
+    if ([segue.identifier isEqual:@"consoleSegue"]) {
+        ConsoleViewController *destController = [segue destinationViewController];
+        destController.token = self.token;
+        destController.troopID = self.troopID;
+        destController.scoutID = self.scoutID;
+    }else if ([segue.identifier isEqual:@"colorSettingsSegue"]){
+        ColorSettingsViewController *colorSettings = [segue destinationViewController];
+        colorSettings.delegate = self;
+    }
+    
     // Pass the selected object to the new view controller.
 }
+-(void)setPreviewColor:(UIColor *)previewColor {
+    previewCell.backgroundColor = previewColor;
+}
+
 @end
