@@ -517,12 +517,12 @@
         
         // do something with chunk
     } while (offset < length);
-    const char bytes[] = {0x1b};
+    const char bytes[] = {0x1B};
     NSData *chunk = [NSData dataWithBytesNoCopy:(char *)bytes
                                          length:sizeof(bytes)
                                    freeWhenDone:NO];
     
-    //[currentPeripheral writeRawData:chunk];
+    [currentPeripheral writeRawData:chunk];
 
     
 }
