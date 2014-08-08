@@ -17,5 +17,6 @@
 #import "UARTViewController.h"
 
 @interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
+- (IBAction)refreshTroops:(id)sender;
 
 @end
