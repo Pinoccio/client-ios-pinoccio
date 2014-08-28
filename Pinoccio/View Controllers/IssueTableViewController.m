@@ -61,10 +61,8 @@
     return YES;
 }
 -(void)submitIssue {
-    ZendeskDropbox *dropbox = [[ZendeskDropbox alloc] initWithDelegate:self];
     NSLog(@"Textfield 1: %lu\nTextfield 2: %lu", (unsigned long)[(UITextField *)[self.view viewWithTag:1] text].length, (unsigned long)[(UITextField *)[self.view viewWithTag:2] text].length);
     if ([(UITextField *)[self.view viewWithTag:1] text].length > 0 && [(UITextField *)[self.view viewWithTag:2] text].length > 0 && [(UITextView *)[self.view viewWithTag:3] text].length > 0) {
-        [dropbox submitWithEmail:[(UITextField *)[self.view viewWithTag:1] text] subject:[(UITextField *)[self.view viewWithTag:2] text] andDescription:[(UITextView *)[self.view viewWithTag:3] text]];
     }else {
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"All the fields are required, please recheck your submission" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
     }

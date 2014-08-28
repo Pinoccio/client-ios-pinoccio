@@ -15,11 +15,10 @@
 		B9060BD519442021000AC166 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BD419442021000AC166 /* MainTableViewController.m */; };
 		B9060BDC1944235F000AC166 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BDB1944235F000AC166 /* LoginViewController.m */; };
 		B9060BDF194423EB000AC166 /* JNKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = B9060BDE194423EB000AC166 /* JNKeychain.m */; };
+		B91AC05E19785591006F06F7 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91AC05C19785591006F06F7 /* Main-iPad.storyboard */; };
 		B921792F19587C7400FC698F /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B921792E19587C7400FC698F /* ConsoleViewController.m */; };
-		B94315BA1967BBF7004FE579 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B94315B81967BBF7004FE579 /* Main-iPad.storyboard */; };
 		B94806971961082F00E4EBB7 /* ColorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */; };
 		B9D989DD1955359700C9BFF3 /* IssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D989DC1955359700C9BFF3 /* IssueTableViewController.m */; };
-		B9D989DF1955388C00C9BFF3 /* libZendeskiPhone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9D989DE1955388C00C9BFF3 /* libZendeskiPhone.a */; };
 		B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */; };
 		B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */; };
 		B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7FC19443DC800711E54 /* MBProgressHUD.m */; };
@@ -62,9 +61,9 @@
 		B9060BDB1944235F000AC166 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B9060BDD194423EB000AC166 /* JNKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JNKeychain.h; sourceTree = "<group>"; };
 		B9060BDE194423EB000AC166 /* JNKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JNKeychain.m; sourceTree = "<group>"; };
+		B91AC05D19785591006F06F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
 		B921792D19587C7400FC698F /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
 		B921792E19587C7400FC698F /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
-		B94315B91967BBF7004FE579 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
 		B94806951961082F00E4EBB7 /* ColorSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSettingsViewController.h; sourceTree = "<group>"; };
 		B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSettingsViewController.m; sourceTree = "<group>"; };
 		B9704DF819509C85003A4DA2 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = "View Controllers/Globals.h"; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 				B9EF8ABF195A6567008B154E /* QuartzCore.framework in Frameworks */,
 				B9EF8ABD195A6560008B154E /* CoreBluetooth.framework in Frameworks */,
 				D0F20B5EB45646BF8B67059A /* libPods.a in Frameworks */,
-				B9D989DF1955388C00C9BFF3 /* libZendeskiPhone.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +213,7 @@
 		B937D3AE19648EEE004B274E /* iPad */ = {
 			isa = PBXGroup;
 			children = (
-				B94315B81967BBF7004FE579 /* Main-iPad.storyboard */,
+				B91AC05C19785591006F06F7 /* Main-iPad.storyboard */,
 			);
 			name = iPad;
 			sourceTree = "<group>";
@@ -368,7 +366,7 @@
 			files = (
 				B9060B7919440FF7000AC166 /* Main.storyboard in Resources */,
 				B9060B7B19440FF7000AC166 /* Images.xcassets in Resources */,
-				B94315BA1967BBF7004FE579 /* Main-iPad.storyboard in Resources */,
+				B91AC05E19785591006F06F7 /* Main-iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,10 +464,10 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		B94315B81967BBF7004FE579 /* Main-iPad.storyboard */ = {
+		B91AC05C19785591006F06F7 /* Main-iPad.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B94315B91967BBF7004FE579 /* Base */,
+				B91AC05D19785591006F06F7 /* Base */,
 			);
 			name = "Main-iPad.storyboard";
 			sourceTree = "<group>";

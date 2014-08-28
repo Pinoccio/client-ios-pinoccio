@@ -49,28 +49,17 @@
 
 }
 -(void)checkLogin:(BOOL)loggedOut {
+    
     if (globalToken == nil) {
-        NSString *tempTokenStorage = [self token];
-        if (![tempTokenStorage  isEqual:@"None!"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
-            globalToken = tempTokenStorage;
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.labelText = @"Getting troops...";
-            dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-                globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
-                [self.tableView reloadData];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                });
-            });
-        }else if(loggedOut){
-            [[[UIAlertView alloc] initWithTitle:@"Logged out!" message:@"Successfully logged out" delegate:nil cancelButtonTitle:@"Ok :D" otherButtonTitles:nil, nil] show];
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        [self refreshTroops];
+    }else {
+        [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }
+    if(loggedOut == YES){
+        [[[UIAlertView alloc] initWithTitle:@"Logged out!" message:@"Successfully logged out" delegate:nil cancelButtonTitle:@"Ok :D" otherButtonTitles:nil, nil] show];
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
 
-        }else {
-            [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
-            [self performSegueWithIdentifier:@"loginSegue" sender:self];
-        }
     }
 }
 - (void)viewDidLoad
@@ -85,6 +74,24 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+-(void)refreshTroops {
+    NSString *tempTokenStorage = [self token];
+    if (![tempTokenStorage  isEqual:@"None!"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
+        globalToken = tempTokenStorage;
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = @"Getting troops...";
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
+            NSLog(@"Refreshing... %@", globalTroopDict);
+
+            [self.tableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
+        });
+    }
 }
 
 -(NSDictionary *)allTroopsFor:(NSString *)token {
@@ -151,6 +158,7 @@
         cell.textLabel.text = globalTroopDict[@"data"][indexPath.row][@"name"];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
         return cell;
 
     }else {
@@ -162,18 +170,33 @@
             cell.backgroundColor = [UIColor redColor];
             cell.textLabel.textColor = [UIColor whiteColor];
         }
+        
         return  cell;
     }
     // Configure the cell...
     
 }
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    switch (section) {
+        case 1:
+            return @"More Options";
+            break;
+            
+        default:
+            return @"Your Troops"; // Replaced with a UIView header on the 0 index
+            break;
+    }
+}
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    if (section == 1) {
-        return @"Copyright © Pinoccio 2014";
-    }else
-    {
-        return nil;
+    switch (section) {
+        case 1:
+            return @"Copyright © Pinoccio 2014";
+            break;
+            
+        default:
+            return nil;
+            break;
     }
 }
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -196,7 +219,13 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-        UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:CGRectMake(30, 20, 260, 67)];
+        CGRect frameRect;
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            frameRect = CGRectMake(250, 20, 260, 67);
+        }else{
+            frameRect = CGRectMake(30, 20, 260, 67);
+        }
+        UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:frameRect];
         pinoccioLogo.image = [UIImage imageNamed:@"pinocciologo"];
         
         [header addSubview:pinoccioLogo];
@@ -281,4 +310,7 @@
 }
 
 
+- (IBAction)refreshTroops:(id)sender {
+    [self refreshTroops];
+}
 @end
