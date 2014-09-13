@@ -19,9 +19,8 @@
 @interface MainTableViewController (){
     NSString *globalToken;
     NSMutableDictionary *globalTroopDict;
-    NSArray *otherOptions;
+    NSMutableArray *globalScoutList;
    
-
 }
 
 @end
@@ -44,31 +43,41 @@
         [self checkLogin:NO];
     }
     
-    
+    self.tableView.backgroundColor = [UIColor colorWithRed:31/255.0f green:38/255.0f blue:51.0f/255.0f alpha:1];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:31/255.0f green:38/255.0f blue:51.0f/255.0f alpha:1];
+    self.navigationController.navigationBar.translucent = NO;
+    [self.navigationController.navigationBar setTitleTextAttributes: @{
+                                                                       NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                                       NSFontAttributeName: [UIFont fontWithName:@"Lato-Regular" size:20.0f]                                                                       }];
+    [self.tableView setSeparatorColor:[UIColor blackColor]];
+    [self.navigationController.navigationBar setBarStyle:UIBarStyleBlack];
+
     //[self performSegueWithIdentifier:@"submitIssue" sender:self];
 
 }
 -(void)checkLogin:(BOOL)loggedOut {
+    if (loggedOut == NO) {
+        globalToken = [self token];
+    }
     
-    if (globalToken == nil) {
+    if (globalToken != nil) {
         [self refreshTroops];
+    }else if (loggedOut == YES){
+        [[[UIAlertView alloc] initWithTitle:@"Logged out!" message:@"Successfully logged out" delegate:nil cancelButtonTitle:@"Ok :D" otherButtonTitles:nil, nil] show];
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }else {
         [[[UIAlertView alloc] initWithTitle:@"Login invalid!" message:@"Check email and password, then try again" delegate:nil cancelButtonTitle:@"Ok :(" otherButtonTitles:nil, nil] show];
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
-    }
-    if(loggedOut == YES){
-        [[[UIAlertView alloc] initWithTitle:@"Logged out!" message:@"Successfully logged out" delegate:nil cancelButtonTitle:@"Ok :D" otherButtonTitles:nil, nil] show];
-        [self performSegueWithIdentifier:@"loginSegue" sender:self];
-
     }
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     globalTroopDict = [[NSMutableDictionary alloc] init];
-    otherOptions = [NSArray arrayWithObjects:@"Bluetooth console", @"Goto HQ",@"Logout", nil];
+    globalScoutList = [[NSMutableArray alloc] init];
     
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -76,14 +85,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 -(void)refreshTroops {
-    NSString *tempTokenStorage = [self token];
-    if (![tempTokenStorage  isEqual:@"None!"]) {
+    NSString *tempTokenStorage = globalToken;
+    
+    if (tempTokenStorage) {
         [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
         globalToken = tempTokenStorage;
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Getting troops...";
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
+    
             NSLog(@"Refreshing... %@", globalTroopDict);
 
             [self.tableView reloadData];
@@ -123,7 +134,7 @@
     if (results != nil && results[@"data"][@"token"] != nil) {
         return results[@"data"][@"token"];
     }else {
-        return @"None!";
+        return nil;
     }
 
 }
@@ -139,66 +150,39 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return [globalTroopDict[@"data"] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    if (section == 0) {
-        return [[globalTroopDict objectForKey:@"data"] count];
-    }else {
-        return otherOptions.count;
+    NSMutableDictionary *tempScoutDict;
+    int count = 0;
+    while (count < [self numberOfSectionsInTableView:self.tableView]) {
+        NSInteger troopID = [globalTroopDict[@"data"][count][@"id"] integerValue];
+        tempScoutDict = [[self scoutsForTroopID:troopID] mutableCopy];
+        [globalScoutList addObject:tempScoutDict];
+        count++;
     }
+    return [[globalScoutList[section][@"data"] mutableCopy] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0){
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TroopCell" forIndexPath:indexPath];
-        cell.textLabel.text = globalTroopDict[@"data"][indexPath.row][@"name"];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        return cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScoutCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithRed:31/255.0f green:38/255.0f blue:51.0f/255.0f alpha:1];
+    cell.textLabel.text = globalScoutList[indexPath.section][@"data"][indexPath.row][@"name"];
+    cell.textLabel.textColor = [UIColor colorWithRed:172/255.0f green:188/255.0f blue:208/255.0f alpha:1];
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:15];
+    
+    return cell;
 
-    }else {
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        cell.textLabel.text = otherOptions[indexPath.row];
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        if (indexPath.row == [otherOptions count] - 1) {
-            cell.backgroundColor = [UIColor redColor];
-            cell.textLabel.textColor = [UIColor whiteColor];
-        }
-        
-        return  cell;
-    }
+    
     // Configure the cell...
     
 }
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    switch (section) {
-        case 1:
-            return @"More Options";
-            break;
-            
-        default:
-            return @"Your Troops"; // Replaced with a UIView header on the 0 index
-            break;
-    }
-}
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
-{
-    switch (section) {
-        case 1:
-            return @"Copyright © Pinoccio 2014";
-            break;
-            
-        default:
-            return nil;
-            break;
-    }
-}
+
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         // Logout
@@ -209,32 +193,23 @@
 
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 100;
-    }else {
-        return 20;
-    }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 35;
 }
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
-        CGRect frameRect;
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-            frameRect = CGRectMake(250, 20, 260, 67);
-        }else{
-            frameRect = CGRectMake(30, 20, 260, 67);
-        }
-        UIImageView *pinoccioLogo = [[UIImageView alloc] initWithFrame:frameRect];
-        pinoccioLogo.image = [UIImage imageNamed:@"pinocciologo"];
-        
-        [header addSubview:pinoccioLogo];
-        return header;
-    }else {
-        return nil;
-    }
-    
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.tableView.bounds.size.width,20)];
+    headerView.backgroundColor = [UIColor colorWithRed:43/255.0f green:53/255.0f blue:69/255.0f alpha:1];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, 250, 20)];
+    titleLabel.textColor = [UIColor colorWithRed:97/255.0f green:117/255.0f blue:138/255.0f alpha:1];
+    titleLabel.font = [UIFont fontWithName:@"Lato-Black" size:20];
+    titleLabel.text = globalTroopDict[@"data"][section][@"name"];
+    [headerView addSubview:titleLabel];
+    return headerView;
 }
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -273,26 +248,14 @@
 }
 */
 
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Logout" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:nil, nil];
     popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    if (indexPath.section == 1){
-        switch (indexPath.row) {
-            case 0:
-                [self performSegueWithIdentifier:@"bluetoothConsole" sender:self];
-                break;
-            case 1:
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://hq.pinocc.io"]];
-                break;
-            case 2:
-                [popupQuery showInView:self.view];
-                break;
-            default:
-                break;
-        }
-    }else if (indexPath.section == 0){
-        [self performSegueWithIdentifier:@"gotoScout" sender:self];
-    }
+    
+    [self performSegueWithIdentifier:@"gotoScout" sender:self];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
@@ -302,10 +265,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier  isEqual: @"gotoScout"]) {
-        ScoutListTableViewController *scoutList = [segue destinationViewController];
+        ScoutControlTableViewController *scoutControl = [segue destinationViewController];
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        scoutList.troopID = [[[globalTroopDict objectForKey:@"data"] objectAtIndex:indexPath.row] objectForKey:@"id"];
-        scoutList.token = globalToken;
+        scoutControl.troopID = [[[globalTroopDict objectForKey:@"data"] objectAtIndex:indexPath.section] objectForKey:@"id"];
+        scoutControl.scoutID = globalScoutList[indexPath.section][@"data"][indexPath.row][@"id"];
+        scoutControl.scoutName = globalScoutList[indexPath.section][@"data"][indexPath.row][@"name"];
+        scoutControl.token = globalToken;
     }
 }
 
@@ -313,4 +278,18 @@
 - (IBAction)refreshTroops:(id)sender {
     [self refreshTroops];
 }
+
+#pragma mark - Scouts 
+
+-(NSMutableDictionary*)scoutsForTroopID:(NSInteger)troopID {
+    NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/%ld/scouts?token=%@",(long)troopID,globalToken]];
+    NSMutableDictionary *dict = [[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil] mutableCopy];
+    if (dict) {
+        return  dict;
+    }else {
+        return  nil;
+    }
+
+}
+
 @end

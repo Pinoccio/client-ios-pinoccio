@@ -27,10 +27,16 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes: @{
+                                                                       NSForegroundColorAttributeName: [UIColor blackColor],
+                                                                       NSFontAttributeName: [UIFont fontWithName:@"Lato-Regular" size:20.0f]                                                                       }];
     globalScoutDict = [[NSMutableDictionary alloc] init];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading...";
+    hud.labelText = @"Calling Scout...";
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self getInitial];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -51,6 +57,12 @@
     self.setColor.borderWidth = 1;
     self.title = self.scoutName;
     self.scoutNameLabel.text = self.scoutName;
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
+                                initWithTitle:@"HQ"
+                                style:UIBarButtonItemStyleBordered
+                                target:self
+                                action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;
 }
 
 - (void)didReceiveMemoryWarning
