@@ -20,7 +20,7 @@
     NSString *globalToken;
     NSMutableDictionary *globalTroopDict;
     NSMutableArray *globalScoutList;
-   
+    UIRefreshControl *refreshControl;
 }
 
 @end
@@ -77,7 +77,9 @@
     globalTroopDict = [[NSMutableDictionary alloc] init];
     globalScoutList = [[NSMutableArray alloc] init];
     
-
+    refreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:refreshControl];
+    [refreshControl addTarget:self action:@selector(refreshTroops) forControlEvents:UIControlEventValueChanged];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -94,12 +96,10 @@
         hud.labelText = @"Getting troops...";
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             globalTroopDict = [[self allTroopsFor:globalToken] mutableCopy];
-    
-            NSLog(@"Refreshing... %@", globalTroopDict);
-
             [self.tableView reloadData];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [refreshControl endRefreshing];
             });
         });
     }
@@ -183,16 +183,7 @@
     
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        // Logout
-        [JNKeychain deleteValueForKey:@"PinoccioKeychainUsername"];
-        [JNKeychain deleteValueForKey:@"PinoccioKeychainPassword"];
-        globalToken = nil;
-        [self checkLogin:YES];
 
-    }
-}
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 35;
@@ -251,11 +242,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:@"Logout" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:nil, nil];
-    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    
     [self performSegueWithIdentifier:@"gotoScout" sender:self];
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
@@ -277,6 +264,22 @@
 
 - (IBAction)refreshTroops:(id)sender {
     [self refreshTroops];
+}
+
+- (IBAction)settingsOptions:(id)sender {
+    UIActionSheet *popupQuery = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:nil, nil];
+    popupQuery.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [popupQuery showInView:self.view];
+}
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        // Logout
+        [JNKeychain deleteValueForKey:@"PinoccioKeychainUsername"];
+        [JNKeychain deleteValueForKey:@"PinoccioKeychainPassword"];
+        globalToken = nil;
+        [self checkLogin:YES];
+        
+    }
 }
 
 #pragma mark - Scouts 

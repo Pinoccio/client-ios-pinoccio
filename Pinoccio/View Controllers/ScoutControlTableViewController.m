@@ -91,15 +91,13 @@
                                            }
                                        }else {
                                            if (alert == nil) {
-                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:[NSString stringWithFormat:@"This scout seems to be unavailable, check back again later. More info: %@",error] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:[NSString stringWithFormat:@"This scout seems to be unavailable, check back again later."] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                                [alert show];
                                            }
                                            
                                            [self.navigationController popViewControllerAnimated:YES];
                                        }
-                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    }else {
-                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                        if (alert == nil) {
                                            alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                            [alert show];
@@ -127,7 +125,6 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -160,9 +157,7 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                        [alert show];
@@ -188,9 +183,7 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                        [alert show];
@@ -214,9 +207,7 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                        [alert show];

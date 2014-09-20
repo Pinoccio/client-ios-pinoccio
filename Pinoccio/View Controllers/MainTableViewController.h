@@ -18,5 +18,6 @@
 
 @interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 - (IBAction)refreshTroops:(id)sender;
+- (IBAction)settingsOptions:(id)sender;
 
 @end
