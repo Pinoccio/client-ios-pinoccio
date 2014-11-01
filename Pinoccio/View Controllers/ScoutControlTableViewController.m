@@ -49,12 +49,8 @@
     [super viewDidLoad];
     
     colorPicker = (NKOColorPickerView *)[self.view viewWithTag:420];
-    self.setRGBButton.highlightStyle = AXWireButtonHighlightStyleFilled;
-    self.setRGBButton.borderWidth = 1;
     self.openConsole.highlightStyle = AXWireButtonHighlightStyleFilled;
     self.openConsole.borderWidth = 1;
-    self.setColor.highlightStyle = AXWireButtonHighlightStyleFilled;
-    self.setColor.borderWidth = 1;
     self.title = self.scoutName;
     self.scoutNameLabel.text = self.scoutName;
     UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
@@ -273,6 +269,21 @@
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                            }];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 3:
+                [self performSegueWithIdentifier:@"colorSettingsSegue" sender:self];
+                break;
+            case 4:
+                [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+                [self setRGBColor:self];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

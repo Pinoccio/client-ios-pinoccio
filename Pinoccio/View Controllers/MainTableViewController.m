@@ -37,7 +37,10 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if ([JNKeychain loadValueForKey:@"PinoccioKeychainUsername"] == nil && [JNKeychain loadValueForKey:@"PinoccioKeychainPassword"] == nil) {
+    if ([JNKeychain loadValueForKey:@"APIToken"] == nil) {
+        globalTroopDict = [[NSMutableDictionary alloc] init];
+        globalScoutList = [[NSMutableArray alloc] init];
+        [self.tableView reloadData];
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
     }else {
         [self checkLogin:NO];
@@ -57,7 +60,7 @@
 }
 -(void)checkLogin:(BOOL)loggedOut {
     if (loggedOut == NO) {
-        globalToken = [self token];
+        globalToken = [JNKeychain loadValueForKey:@"APIToken"];
     }
     
     if (globalToken != nil) {
@@ -87,11 +90,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 -(void)refreshTroops {
-    NSString *tempTokenStorage = globalToken;
-    
-    if (tempTokenStorage) {
-        [[NSUserDefaults standardUserDefaults] setObject:tempTokenStorage forKey:@"globalToken"];
-        globalToken = tempTokenStorage;
+    if (globalToken) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = @"Getting troops...";
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -172,13 +171,10 @@
     cell.backgroundColor = [UIColor colorWithRed:31/255.0f green:38/255.0f blue:51.0f/255.0f alpha:1];
     cell.textLabel.text = globalScoutList[indexPath.section][@"data"][indexPath.row][@"name"];
     cell.textLabel.textColor = [UIColor colorWithRed:172/255.0f green:188/255.0f blue:208/255.0f alpha:1];
-    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:15];
     
     return cell;
-
-    
     // Configure the cell...
     
 }
@@ -285,8 +281,11 @@
 #pragma mark - Scouts 
 
 -(NSMutableDictionary*)scoutsForTroopID:(NSInteger)troopID {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     NSURL *urlString = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.pinocc.io/v1/%ld/scouts?token=%@",(long)troopID,globalToken]];
-    NSMutableDictionary *dict = [[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil] mutableCopy];
+    if ([NSData dataWithContentsOfURL:urlString]) {
+        dict = [[NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:urlString] options:0 error:nil] mutableCopy];
+    }
     if (dict) {
         return  dict;
     }else {
