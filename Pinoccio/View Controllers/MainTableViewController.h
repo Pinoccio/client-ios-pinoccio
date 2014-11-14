@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ScoutListTableViewController.h"
+#import "ScoutControlTableViewController.h"
 #import "LoginViewController.h"
 #import "JNKeychain.h"
 #import "MBProgressHUD.h"
@@ -18,5 +18,6 @@
 
 @interface MainTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 - (IBAction)refreshTroops:(id)sender;
+- (IBAction)settingsOptions:(id)sender;
 
 @end

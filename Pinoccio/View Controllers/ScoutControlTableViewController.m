@@ -27,10 +27,16 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.translucent = YES;
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes: @{
+                                                                       NSForegroundColorAttributeName: [UIColor blackColor],
+                                                                       NSFontAttributeName: [UIFont fontWithName:@"Lato-Regular" size:20.0f]                                                                       }];
     globalScoutDict = [[NSMutableDictionary alloc] init];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = @"Loading...";
+    hud.labelText = @"Calling Scout...";
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self getInitial];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -43,14 +49,16 @@
     [super viewDidLoad];
     
     colorPicker = (NKOColorPickerView *)[self.view viewWithTag:420];
-    self.setRGBButton.highlightStyle = AXWireButtonHighlightStyleFilled;
-    self.setRGBButton.borderWidth = 1;
     self.openConsole.highlightStyle = AXWireButtonHighlightStyleFilled;
     self.openConsole.borderWidth = 1;
-    self.setColor.highlightStyle = AXWireButtonHighlightStyleFilled;
-    self.setColor.borderWidth = 1;
     self.title = self.scoutName;
     self.scoutNameLabel.text = self.scoutName;
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
+                                initWithTitle:@"HQ"
+                                style:UIBarButtonItemStyleBordered
+                                target:self
+                                action:nil];
+    self.navigationController.navigationBar.topItem.backBarButtonItem=btnBack;
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,15 +87,13 @@
                                            }
                                        }else {
                                            if (alert == nil) {
-                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:[NSString stringWithFormat:@"This scout seems to be unavailable, check back again later. More info: %@",error] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                                               alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:[NSString stringWithFormat:@"This scout seems to be unavailable, check back again later."] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                                [alert show];
                                            }
                                            
                                            [self.navigationController popViewControllerAnimated:YES];
                                        }
-                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    }else {
-                                       [MBProgressHUD hideHUDForView:self.view animated:YES];
                                        if (alert == nil) {
                                            alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                            [alert show];
@@ -115,7 +121,6 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -148,9 +153,7 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                        [alert show];
@@ -176,9 +179,7 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                        [alert show];
@@ -202,9 +203,7 @@
                                        }
                                        [self.navigationController popViewControllerAnimated:YES];
                                    }
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                }else {
-                                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                                    if (alert == nil) {
                                        alert = [[UIAlertView alloc] initWithTitle:@"Scout" message:@"This scout seems to be unavailable, check back again later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
                                        [alert show];
@@ -270,6 +269,21 @@
                                }
                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                            }];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            case 3:
+                [self performSegueWithIdentifier:@"colorSettingsSegue" sender:self];
+                break;
+            case 4:
+                [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+                [self setRGBColor:self];
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

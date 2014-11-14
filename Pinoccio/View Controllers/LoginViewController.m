@@ -8,7 +8,10 @@
 
 #import "LoginViewController.h"
 
-@interface LoginViewController ()
+@interface LoginViewController (){
+    NSString *email;
+    NSString *password;
+}
 
 @end
 
@@ -38,17 +41,50 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)login:(id)sender {
-    [JNKeychain saveValue:[(UITextField*)[self.view viewWithTag:1] text] forKey:@"PinoccioKeychainUsername"];
-    [JNKeychain saveValue:[(UITextField*)[self.view viewWithTag:2] text] forKey:@"PinoccioKeychainPassword"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    email = [(UITextField *)[self.view viewWithTag:1] text];
+    password = [(UITextField *)[self.view viewWithTag:2] text];
 
-  
+    NSString *token = [self token];
+    if (token) {
+        [JNKeychain saveValue:[self token] forKey:@"APIToken"];
+        [(UITextField*)[self.view viewWithTag:2] resignFirstResponder];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }else {
+       [[[UIAlertView alloc] initWithTitle:@"Login failed, try again." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
+    }
+}
+-(NSString *)token {
+    
+    NSString *post = [NSString stringWithFormat:@"{\"email\":\"%@\",\"password\":\"%@\"}",email,password];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:@"https://api.pinocc.io/v1/login"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    [request setHTTPBody:postData];
+    
+    NSURLResponse *response;
+    NSError *error;
+    
+    NSData *jsonData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
+    if (error) NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+    if (results != nil && results[@"data"][@"token"] != nil) {
+        return results[@"data"][@"token"];
+    }else {
+        return nil;
+    }
+    
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if ([textField tag] == 1) {
         [(UITextField*)[self.view viewWithTag:2] becomeFirstResponder];
     }else if ([textField tag] == 2){
-        [(UITextField*)[self.view viewWithTag:2] resignFirstResponder];
         [self login:nil];
     }
     return YES;

@@ -18,10 +18,11 @@
 		B91AC05E19785591006F06F7 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91AC05C19785591006F06F7 /* Main-iPad.storyboard */; };
 		B921792F19587C7400FC698F /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B921792E19587C7400FC698F /* ConsoleViewController.m */; };
 		B94806971961082F00E4EBB7 /* ColorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */; };
-		B9D989DD1955359700C9BFF3 /* IssueTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D989DC1955359700C9BFF3 /* IssueTableViewController.m */; };
-		B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */; };
+		B997A36B19D7DD6C00550854 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B997A36A19D7DD6C00550854 /* Launch Screen.xib */; };
 		B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */; };
 		B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DCD7FC19443DC800711E54 /* MBProgressHUD.m */; };
+		B9E2696319C4BB9000456B97 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9E2696019C4B99F00456B97 /* Lato-Regular.ttf */; };
+		B9E2696419C4BB9300456B97 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9E2696219C4B9AD00456B97 /* Lato-Black.ttf */; };
 		B9EF8AAC195A6117008B154E /* UARTPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EF8AA9195A6117008B154E /* UARTPeripheral.m */; };
 		B9EF8AAD195A6117008B154E /* UARTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EF8AAB195A6117008B154E /* UARTViewController.m */; };
 		B9EF8AB8195A617F008B154E /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EF8AB1195A617F008B154E /* NSString+hex.m */; };
@@ -67,16 +68,13 @@
 		B94806951961082F00E4EBB7 /* ColorSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSettingsViewController.h; sourceTree = "<group>"; };
 		B94806961961082F00E4EBB7 /* ColorSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSettingsViewController.m; sourceTree = "<group>"; };
 		B9704DF819509C85003A4DA2 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = "View Controllers/Globals.h"; sourceTree = "<group>"; };
-		B9D989D91955340F00C9BFF3 /* ZendeskDropbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZendeskDropbox.h; sourceTree = "<group>"; };
-		B9D989DB1955359700C9BFF3 /* IssueTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueTableViewController.h; sourceTree = "<group>"; };
-		B9D989DC1955359700C9BFF3 /* IssueTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueTableViewController.m; sourceTree = "<group>"; };
-		B9D989DE1955388C00C9BFF3 /* libZendeskiPhone.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libZendeskiPhone.a; sourceTree = "<group>"; };
-		B9DCD7F519442E7400711E54 /* ScoutListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoutListTableViewController.h; sourceTree = "<group>"; };
-		B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoutListTableViewController.m; sourceTree = "<group>"; };
+		B997A36A19D7DD6C00550854 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		B9DCD7F819443AD100711E54 /* ScoutControlTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoutControlTableViewController.h; sourceTree = "<group>"; };
 		B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoutControlTableViewController.m; sourceTree = "<group>"; };
 		B9DCD7FB19443DC800711E54 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		B9DCD7FC19443DC800711E54 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		B9E2696019C4B99F00456B97 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		B9E2696219C4B9AD00456B97 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
 		B9EF8AA8195A6117008B154E /* UARTPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UARTPeripheral.h; sourceTree = "<group>"; };
 		B9EF8AA9195A6117008B154E /* UARTPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UARTPeripheral.m; sourceTree = "<group>"; };
 		B9EF8AAA195A6117008B154E /* UARTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UARTViewController.h; sourceTree = "<group>"; };
@@ -138,14 +136,11 @@
 		B9060B6C19440FF7000AC166 /* Pinoccio */ = {
 			isa = PBXGroup;
 			children = (
-				B937D3AE19648EEE004B274E /* iPad */,
-				B9D989D71955340F00C9BFF3 /* ZendeskDropboxLib */,
+				B937D3AE19648EEE004B274E /* Interfaces */,
 				B9060B7A19440FF7000AC166 /* Images.xcassets */,
 				B9060B7119440FF7000AC166 /* AppDelegate.h */,
 				B9060B7219440FF7000AC166 /* AppDelegate.m */,
-				B9EF8AAF195A6166008B154E /* Class Extensions */,
 				B9704DF819509C85003A4DA2 /* Globals.h */,
-				B9060B7719440FF7000AC166 /* Main.storyboard */,
 				B9DCD7FF19443DD300711E54 /* Libraries */,
 				B9060BE1194423F8000AC166 /* View Controllers */,
 				B9060B6D19440FF7000AC166 /* Supporting Files */,
@@ -195,12 +190,8 @@
 				B9060BD419442021000AC166 /* MainTableViewController.m */,
 				B9060BDA1944235F000AC166 /* LoginViewController.h */,
 				B9060BDB1944235F000AC166 /* LoginViewController.m */,
-				B9DCD7F519442E7400711E54 /* ScoutListTableViewController.h */,
-				B9DCD7F619442E7400711E54 /* ScoutListTableViewController.m */,
 				B9DCD7F819443AD100711E54 /* ScoutControlTableViewController.h */,
 				B9DCD7F919443AD200711E54 /* ScoutControlTableViewController.m */,
-				B9D989DB1955359700C9BFF3 /* IssueTableViewController.h */,
-				B9D989DC1955359700C9BFF3 /* IssueTableViewController.m */,
 				B921792D19587C7400FC698F /* ConsoleViewController.h */,
 				B921792E19587C7400FC698F /* ConsoleViewController.m */,
 				B94806951961082F00E4EBB7 /* ColorSettingsViewController.h */,
@@ -210,21 +201,15 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		B937D3AE19648EEE004B274E /* iPad */ = {
+		B937D3AE19648EEE004B274E /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				B9E2696119C4B9A300456B97 /* Fonts */,
 				B91AC05C19785591006F06F7 /* Main-iPad.storyboard */,
+				B997A36A19D7DD6C00550854 /* Launch Screen.xib */,
+				B9060B7719440FF7000AC166 /* Main.storyboard */,
 			);
-			name = iPad;
-			sourceTree = "<group>";
-		};
-		B9D989D71955340F00C9BFF3 /* ZendeskDropboxLib */ = {
-			isa = PBXGroup;
-			children = (
-				B9D989DE1955388C00C9BFF3 /* libZendeskiPhone.a */,
-				B9D989D91955340F00C9BFF3 /* ZendeskDropbox.h */,
-			);
-			path = ZendeskDropboxLib;
+			name = Interfaces;
 			sourceTree = "<group>";
 		};
 		B9DCD7FE19443DCB00711E54 /* MBProgressHUD */ = {
@@ -239,10 +224,20 @@
 		B9DCD7FF19443DD300711E54 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B9EF8AAF195A6166008B154E /* Class Extensions */,
 				B9DCD7FE19443DCB00711E54 /* MBProgressHUD */,
 				B9060BE0194423F0000AC166 /* Keychain */,
 			);
 			path = Libraries;
+			sourceTree = "<group>";
+		};
+		B9E2696119C4B9A300456B97 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B9E2696019C4B99F00456B97 /* Lato-Regular.ttf */,
+				B9E2696219C4B9AD00456B97 /* Lato-Black.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		B9EF8AAE195A611D008B154E /* Bluetooth */ = {
@@ -269,6 +264,7 @@
 				B9EF8AB7195A617F008B154E /* UITextView+lineCount.m */,
 			);
 			name = "Class Extensions";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		D99794EF2C2D405891314C86 /* Frameworks */ = {
@@ -365,8 +361,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9060B7919440FF7000AC166 /* Main.storyboard in Resources */,
+				B9E2696319C4BB9000456B97 /* Lato-Regular.ttf in Resources */,
+				B9E2696419C4BB9300456B97 /* Lato-Black.ttf in Resources */,
 				B9060B7B19440FF7000AC166 /* Images.xcassets in Resources */,
 				B91AC05E19785591006F06F7 /* Main-iPad.storyboard in Resources */,
+				B997A36B19D7DD6C00550854 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +418,6 @@
 			files = (
 				B9060BD519442021000AC166 /* MainTableViewController.m in Sources */,
 				B9EF8AAC195A6117008B154E /* UARTPeripheral.m in Sources */,
-				B9DCD7F719442E7400711E54 /* ScoutListTableViewController.m in Sources */,
 				B921792F19587C7400FC698F /* ConsoleViewController.m in Sources */,
 				B9060B7319440FF7000AC166 /* AppDelegate.m in Sources */,
 				B9DCD7FD19443DC800711E54 /* MBProgressHUD.m in Sources */,
@@ -430,7 +428,6 @@
 				B9060B7019440FF7000AC166 /* main.m in Sources */,
 				B9EF8ABB195A617F008B154E /* UITextView+lineCount.m in Sources */,
 				B94806971961082F00E4EBB7 /* ColorSettingsViewController.m in Sources */,
-				B9D989DD1955359700C9BFF3 /* IssueTableViewController.m in Sources */,
 				B9DCD7FA19443AD200711E54 /* ScoutControlTableViewController.m in Sources */,
 				B9060BDC1944235F000AC166 /* LoginViewController.m in Sources */,
 				B9EF8AB8195A617F008B154E /* NSString+hex.m in Sources */,
@@ -509,7 +506,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -544,7 +541,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -562,10 +559,7 @@
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pinoccio/ZendeskDropboxLib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Pinoccio;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -583,10 +577,7 @@
 				INFOPLIST_FILE = "Pinoccio/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pinoccio/ZendeskDropboxLib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = Pinoccio;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

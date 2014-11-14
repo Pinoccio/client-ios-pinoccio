@@ -10,29 +10,29 @@
 	<string>Pinoccio</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BF9F3495-ADD0-4144-802B-CD33675C5AA5</key>
+		<key>83CAD0072AA6560BDC7EDD50179025ACE07F9142</key>
 		<string>https://github.com/Haifisch/client-ios-pinoccio.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Pinoccio.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BF9F3495-ADD0-4144-802B-CD33675C5AA5</key>
+		<key>83CAD0072AA6560BDC7EDD50179025ACE07F9142</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Haifisch/client-ios-pinoccio.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BF9F3495-ADD0-4144-802B-CD33675C5AA5</string>
+	<string>83CAD0072AA6560BDC7EDD50179025ACE07F9142</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BF9F3495-ADD0-4144-802B-CD33675C5AA5</string>
+			<string>83CAD0072AA6560BDC7EDD50179025ACE07F9142</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Pinoccio</string>
 		</dict>
